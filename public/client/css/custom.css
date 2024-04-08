@@ -1,0 +1,75 @@
+.custom-form{
+    position: fixed; /* fixed, щоб модальне вікно було зафіксовано на екрані */
+    top: 25%; /* розміщуємо модальне вікно по вертикалі в центрі екрану */
+    left: 50%; /* розміщуємо модальне вікно по горизонталі в центрі екрану */
+    transform: translate(-50%, -50%); /* використовуємо трансформацію, щоб точно відцентрувати модальне вікно */
+    background: white;
+    border: 1px solid grey;
+    z-index: 1000;
+    padding: 15px 5px;
+}
+
+.back-ground {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%; /* розмір на всю ширину екрану */
+    height: 100%; /* розмір на всю висоту екрану */
+    background: black;
+    z-index: 999;
+    opacity: 0.5;
+}
+
+.close {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-top: -5px;
+}
+
+body{
+    height: 100%;
+}
+
+.wrapper{
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+}
+
+main{
+    flex: 1 1 auto;
+}
+
+.content-wrapper{
+    width: 1170px;
+    align-self: center;
+}
+
+.product {
+    width: 100%;
+    margin-bottom: 20px;
+    height: 100%;
+}
+
+.product .product-body {
+    height: 100%;
+}
+
+.product-name-edit {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#breadcrumb{
+    background: none;
+    margin-bottom: 0px;
+}
+
+.product{
+    height: auto;
+}
+
+

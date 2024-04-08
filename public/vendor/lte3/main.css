@@ -1,0 +1,155 @@
+.va-center, .table>tbody>tr>td.va-center, .table>tbody>tr.va-center>td {
+	vertical-align: middle;
+}
+.ha-center, .table>tbody>tr>td.ha-center, .table>tbody>tr.ha-center>td {
+	text-align: center;
+}
+.vha-center, .table>tbody>tr>td.vha-center, .table>tbody>tr.vha-center>td {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.table img.table-avatar {
+    border-radius: 50%;
+    display: inline;
+    width: 2.5rem;
+}
+
+a.hover-edit {
+    color: inherit;
+    text-decoration: none;
+}
+.hover-edit:after {
+    position: absolute;
+}
+.hover-edit:hover:after {
+    padding-left: 5px;
+    content: '✎';
+}
+
+.js-clipboard {
+    cursor: pointer;
+}
+.js-clipboard:after {
+    position: absolute;
+}
+.js-clipboard.with-mark:hover:after {
+    padding-left: 5px;
+    content: '✔';
+}
+
+/* jQuery Sortable Nested */
+body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+ul.js-sortable-nested li.placeholder {
+    position: relative;
+    border-bottom: 1px solid black;
+    height: 15px;
+    /** More li styles **/
+}
+
+ul.js-sortable-nested li.placeholder:before {
+    position: absolute;
+    /** Define arrowhead **/
+}
+
+.todo-list.js-sortable-nested ul li {
+    list-style-type: none;
+    margin-top: 5px;
+}
+
+.todo-list.js-sortable-nested li .tools a {
+    padding-right: 5px;
+}
+
+.todo-list.js-sortable-nested li a.text {
+    color: #495057;
+}
+
+.dark-mode .todo-list.js-sortable-nested li a.text {
+    color: #fff;
+}
+
+.dark-mode .node-:not(.node-disabled):hover {
+    background-color: #3f6791;
+}
+
+.content-header h1>small {
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.btn-lte-fixed {
+    position: fixed;
+    top: 95px;
+    right: 7px;
+    border-radius: 100%;
+    opacity: .4;
+    z-index: 3;
+}
+.btn-lte-fixed:hover {
+    opacity: .8;
+}
+
+.lte-pointer:hover {
+    cursor: pointer;
+}
+
+.cursor-move {
+    cursor: move;
+}
+.lte-n-resize:hover {
+    cursor: n-resize;
+}
+.lte-all-scroll:hover {
+    cursor: all-scroll;
+}
+
+.form-group.row .custom-control-label {
+    margin-right: 10px;
+}
+
+.mfp-wrap {
+    z-index: 1051;
+}
+
+details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 0.5em 0.5em 0;
+}
+
+summary {
+    font-weight: bold;
+    margin: -0.5em -0.5em 0;
+    padding: 0.5em;
+}
+details[open] {
+    padding: 0.5em;
+}
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 0.5em;
+}
+.lte-modal-show img {
+    max-width: 100%;
+}
+
+.f-multyitems .f-item {
+    border: 1px solid #b5b6b7;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-actions.dropdown:hover .dropdown-menu {
+    display: block;
+}

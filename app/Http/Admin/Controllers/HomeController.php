@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Admin\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Lead;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
+
+class HomeController extends Controller
+{
+    public function __invoke(): View
+    {
+        $this->makeCache();
+
+        $orders = Order::latest()->take(20)->get();
+
+        return view('admin.home', ['orders' => $orders]);
+    }
+
+    private function makeCache()
+    {
+        Cache::remember('statistic', 300, function(){
+            return [
+                'orders' => Order::count(),
+                'products' => Product::count(),
+                'users' => User::count(),
+                'leads' => Lead::count()
+            ];
+        });
+    }
+}
