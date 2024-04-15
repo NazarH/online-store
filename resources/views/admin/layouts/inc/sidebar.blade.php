@@ -12,6 +12,17 @@
                             Логи
                         </a>
                     </div>
+
+                </div>
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="row align-items-center" >
+                        <a href="{{route('admin.xml.generate')}}" class="btn btn btn-primary ml-2" style="color: white">
+                            Згенерувати
+                        </a>
+                        <a href="/sitemap.xml" class="d-block font-weight-bold ml-2" target="_blank">
+                            Sitemap.XML
+                        </a>
+                    </div>
                 </div>
             @endauth
 

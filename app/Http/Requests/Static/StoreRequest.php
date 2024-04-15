@@ -24,7 +24,8 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string',
             'text' => 'required|string',
-            'type' => 'required|string'
+            'type' => 'required|string',
+            'seo.*' => 'nullable|string',
         ];
     }
 }

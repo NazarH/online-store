@@ -8,6 +8,11 @@ use Illuminate\View\View;
 
 class CatalogController extends Controller
 {
+    /**
+     * Показує індексну сторінку каталогу з усіма категоріями товарів.
+     *
+     * @return View
+     */
     public function index(): View
     {
         $categories = Category::get()->toTree();

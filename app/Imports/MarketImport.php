@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Property;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -15,8 +16,9 @@ class MarketImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param Collection $collection
+     * @return RedirectResponse
     */
-    public function collection(Collection $collection)
+    public function collection(Collection $collection): RedirectResponse
     {
         foreach ($collection as $item) {
             $brand = Brand::firstOrCreate([
@@ -48,8 +50,9 @@ class MarketImport implements ToCollection, WithHeadingRow
      * @param $item
      * @param $category
      * @param $product
+     * @return  void
      */
-    private function makeAttributes($item, $category, $product)
+    private function makeAttributes($item, $category, $product): void
     {
         foreach (explode(' | ', $item['attributes']) as $attribute) {
             $arr = explode(': ', $attribute);

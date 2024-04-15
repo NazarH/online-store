@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
+    /**
+     * Зберігає новий коментар для продукту.
+     *
+     * @param StoreRequest $request
+     * @param Product $product
+     * @return RedirectResponse
+     */
     public function store(StoreRequest $request, Product $product): RedirectResponse
     {
         $data = $request->validated();

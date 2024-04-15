@@ -1,21 +1,6 @@
 @extends('client.layouts.app')
 @section('content')
-    <div id="breadcrumb" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumb-tree">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="#">All Categories</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
+    {{ Breadcrumbs::render('client.catalog.category', $product->category()->first()) }}
     <div class="section">
         <div class="container">
             <div class="row">
@@ -66,7 +51,7 @@
                             {{ count($comments) }} Review(s)
                         </div>
                         <div>
-                            <h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
+                            <h3 class="product-price">UAH {{$product->price}} <del class="product-old-price">{{$product->old_price}}</del></h3>
                             <span class="product-available">
                                 @if($product->count)
                                     {{$product->count}} In Stock
@@ -187,5 +172,75 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="section-title text-center">
+                        <h3 class="title">Similar Products</h3>
+                    </div>
+                </div>
+
+                @foreach($product->category()->first()->products()->take(4)->get() as $item)
+                    <div class="col-md-3 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="{{asset('client/img/product01.png')}}" alt="">
+                                <div class="product-label">
+                                    <span class="sale">{{ round(((($item->price - $item->old_price) / $item->old_price) * 100)) }}%</span>
+                                </div>
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">{{$product->category()->first()->name}}</p>
+                                <h3 class="product-name product-name-edit">
+                                    <a href="{{route('client.catalog.product', ['c_slug' => $item->category->slug, 'p_slug' => $item->slug])}}">
+                                        {{$item->name}}
+                                    </a>
+                                </h3>
+                                <h4 class="product-price">{{  $item->price }} <del class="product-old-price">{{  $item->old_price }}</del></h4>
+                                <div class="product-rating">
+                                </div>
+                                <div class="product-btns">
+                                    @if(Auth::user()?->selected()->where('product_id', $item->id)->exists())
+                                        <a href="{{route('client.wishlist.index')}}" class="btn btn-success">In wishlist</a>
+                                    @else
+                                        @if(Auth::user())
+                                            <form action="{{route('client.wishlist.store', $item->id)}}" method="POST">
+                                                @csrf
+                                                <button class="add-to-wishlist btn btn-primary" type="submit">
+                                                    <i class="fa fa-heart-o"></i>
+                                                    <span class="tooltipp">add to wishlist</span>
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
+                            @unless(\App\Facades\Basket::exist($item))
+                                <div class="add-to-cart">
+                                    <form action="{{route('client.basket.store', $item->id)}}" method="POST">
+                                        @csrf
+                                        <button class="add-to-cart-btn" type="submit">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            add to cart
+                                        </button>
+                                    </form>
+                                </div>
+                            @endunless
+                        </div>
+                    </div>
+                @endforeach
+
+                <div class="clearfix visible-sm visible-xs"></div>
+
+
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
     </div>
 @endsection

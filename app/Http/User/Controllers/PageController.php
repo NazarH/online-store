@@ -9,6 +9,12 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
+    /**
+     * Відображає статичну сторінку залежно від її слагу (slug).
+     *
+     * @param Request $request
+     * @return View
+     */
     public function index(Request $request): View
     {
         $page = StaticPage::where('slug', '=', $request->slug)->first();

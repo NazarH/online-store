@@ -7,8 +7,11 @@
     "require": {
         "php": "^8.1",
         "ckeditor/ckeditor": "^4.24",
+        "cloudipsp/php-sdk-v2": "^1.0",
+        "diglactic/laravel-breadcrumbs": "^9.0",
         "fomvasss/laravel-lte3": "^1.26",
         "fomvasss/laravel-medialibrary-extension": "^5.8",
+        "fomvasss/laravel-seo": "^1.7",
         "fomvasss/laravel-variables": "^5.3",
         "guzzlehttp/guzzle": "^7.2",
         "kalnoy/nestedset": "^6.0",
@@ -16,9 +19,12 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.5",
+        "lorisleiva/laravel-actions": "^2.8",
         "maatwebsite/excel": "^3.1",
+        "orchestra/parser": "^8.0",
         "rap2hpoutre/laravel-log-viewer": "^2.4",
-        "spatie/laravel-permission": "^6.4"
+        "spatie/laravel-permission": "^6.4",
+        "spatie/laravel-sitemap": "^7.2"
     },
     "require-dev": {
         "almasaeed2010/adminlte": "^3.2",

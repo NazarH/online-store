@@ -9,7 +9,13 @@ use App\Models\User;
 
 class OrderStoreAction
 {
-    public function handle($data)
+    /**
+     * Обробляє створення замовлення.
+     *
+     * @param array $data Дані для створення замовлення.
+     * @return void
+     */
+    public function handle(array $data): void
     {
         $user = User::where('email', '=', $data['email'])->first();
 

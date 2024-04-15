@@ -17,6 +17,11 @@ use Illuminate\View\View;
 
 class AttributeController extends Controller
 {
+    /**
+     * Показує список атрибутів.
+     *
+     * @return View
+     */
     public function index(): View
     {
         $attributes = Attribute::paginate(10);
@@ -24,6 +29,11 @@ class AttributeController extends Controller
         return view('admin.attributes.index', ['attributes' => $attributes]);
     }
 
+    /**
+     * Показує форму для створення нового атрибуту.
+     *
+     * @return View
+     */
     public function create(): View
     {
         $categories = Category::get()->pluck('name', 'id')->toArray();
@@ -31,6 +41,13 @@ class AttributeController extends Controller
         return view('admin.attributes.create', ['categories' => $categories]);
     }
 
+    /**
+     * Зберігає новий атрибут в базі даних.
+     *
+     * @param StoreRequest $request
+     * @param AttributeStoreAction $action
+     * @return RedirectResponse
+     */
     public function store(StoreRequest $request, AttributeStoreAction $action): RedirectResponse
     {
         $data = $request->validated();
@@ -39,6 +56,12 @@ class AttributeController extends Controller
         return redirect()->route('admin.attributes.index');
     }
 
+    /**
+     * Показує форму для редагування конкретного атрибуту.
+     *
+     * @param Attribute $attribute
+     * @return View
+     */
     public function edit(Attribute $attribute): View
     {
         $categories = Category::get()->pluck('name', 'id')->toArray();
@@ -49,6 +72,14 @@ class AttributeController extends Controller
         ]);
     }
 
+    /**
+     * Оновлює існуючий атрибут в базі даних.
+     *
+     * @param UpdateRequest $request
+     * @param Attribute $attribute
+     * @param AttributeUpdateAction $action
+     * @return RedirectResponse
+     */
     public function update(UpdateRequest $request, Attribute $attribute, AttributeUpdateAction $action): RedirectResponse
     {
         $data = $request->validated();
@@ -57,6 +88,14 @@ class AttributeController extends Controller
         return redirect()->route('admin.attributes.index');
     }
 
+    /**
+     * Додає значення до атрибуту.
+     *
+     * @param AddRequest $request
+     * @param Attribute $attribute
+     * @param AttributeAddAction $action
+     * @return RedirectResponse
+     */
     public function add(AddRequest $request, Attribute $attribute, AttributeAddAction $action): RedirectResponse
     {
         $data = $request->validated();
@@ -65,6 +104,13 @@ class AttributeController extends Controller
         return redirect()->route('admin.attributes.edit', $attribute->id);
     }
 
+    /**
+     * Видаляє конкретний атрибут з бази даних.
+     *
+     * @param Attribute $attribute
+     * @param AttributeDestroyAction $action
+     * @return RedirectResponse
+     */
     public function destroy(Attribute $attribute, AttributeDestroyAction $action): RedirectResponse
     {
         $action->handle($attribute);

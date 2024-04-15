@@ -9,9 +9,15 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class HomeController extends Controller
 {
+    /**
+     * Обробник для відображення головної сторінки адміністратора.
+     *
+     * @return View
+     */
     public function __invoke(): View
     {
         $this->makeCache();
@@ -21,6 +27,9 @@ class HomeController extends Controller
         return view('admin.home', ['orders' => $orders]);
     }
 
+    /**
+     * Метод для завантаження Excel-файлу з даними.
+     */
     private function makeCache()
     {
         Cache::remember('statistic', 300, function(){

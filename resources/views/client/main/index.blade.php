@@ -43,9 +43,17 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </div>
+                                            @unless(\App\Facades\Basket::exist($product))
+                                                <div class="add-to-cart">
+                                                    <form action="{{route('client.basket.store', $product->id)}}" method="POST">
+                                                        @csrf
+                                                        <button class="add-to-cart-btn" type="submit">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            add to cart
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @endunless
                                         </div>
                                     @endforeach
                                 </div>

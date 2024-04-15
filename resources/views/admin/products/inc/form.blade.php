@@ -74,9 +74,16 @@
         ]) !!}
     </div>
 
+    <HR>
+
+    @include('components.metatag', ['item' => isset($product) ? $product : null])
+
     <div class="text-center">
         <button type="submit" class="btn btn-success d-block mx-auto">
             Submit
         </button>
     </div>
+
 </form>
+
+

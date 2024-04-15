@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    /**
+     * Зберігає коментар для статті.
+     *
+     * @param StoreRequest $request
+     * @param Article $article
+     * @return RedirectResponse
+     */
     public function store(StoreRequest $request, Article $article): RedirectResponse
     {
         $data = $request->validated();

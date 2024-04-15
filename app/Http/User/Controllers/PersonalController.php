@@ -10,11 +10,23 @@ use Illuminate\View\View;
 
 class PersonalController extends Controller
 {
+    /**
+     * Відображає особистий кабінет користувача.
+     *
+     * @return View
+     */
     public function index(): View
     {
         return view('client.personal.index');
     }
 
+    /**
+     * Оновлює дані користувача.
+     *
+     * @param UpdateRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function update(UpdateRequest $request, User $user): RedirectResponse
     {
         $data = $request->validated();

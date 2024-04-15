@@ -18,6 +18,8 @@
         ]) !!}
     @endif
 
+    @include('components.metatag', ['item' => isset($category) ? $category : null])
+
     <button type="submit" class="btn btn-success">
         Submit
     </button>

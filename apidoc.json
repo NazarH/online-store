@@ -1,0 +1,22 @@
+{
+    "name": "My API Documentation",
+    "version": "1.0.0",
+    "description": "Documentation for my API",
+    "title": "My API",
+    "url": "http://online-store.test/api",
+    "sampleUrl": false,
+    "header": {
+        "title": "My API",
+        "content": "<h1>My API Documentation</h1>"
+    },
+    "template": {
+        "withCompare": false,
+        "withGenerator": false
+    },
+    "exclude": [
+        "node_modules/",
+        ".git/"
+    ],
+    "src": "app/Http/Api/",
+    "dest": "public/docs/"
+}

@@ -29,7 +29,8 @@ class StoreRequest extends FormRequest
             'price' => 'required|numeric',
             'old_price' => 'required|numeric',
             'count' => 'required|numeric',
-            'category_id' => 'required|numeric'
+            'category_id' => 'required|numeric',
+            'seo.*' => 'nullable|string',
         ];
     }
 }

@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\Mail;
 
 class NotificationSendAction
 {
-    public function handle($data)
+    /**
+     * Обробляє відправлення сповіщень.
+     *
+     * @param array $data Дані для відправлення сповіщень.
+     * @return void
+     */
+    public function handle(array $data): void
     {
         $leads = Lead::where('type', '=', $data['type'])
             ->with('user');

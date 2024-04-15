@@ -6,7 +6,13 @@ use App\Models\User;
 
 class UserStoreAction
 {
-    public function handle($data)
+    /**
+     * Обробляє створення користувача.
+     *
+     * @param array $data Дані для створення користувача.
+     * @return void
+     */
+    public function handle(array $data): void
     {
         $data['role'] = 'client';
 

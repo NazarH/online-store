@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\Facade;
  */
 class Currency extends Facade
 {
-    protected static function getFacadeAccessor()
+    /**
+     * Отримує доступ до зареєстрованого іменованого зв'язку для фасада.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor(): string
     {
         return CurrencyService::class;
     }

@@ -10,6 +10,11 @@ use Illuminate\View\View;
 
 class WishlistController extends Controller
 {
+    /**
+     * Відображає сторінку бажаних товарів користувача.
+     *
+     * @return View
+     */
     public function index(): View
     {
         $products = Auth::user()->selected()->paginate(9);
@@ -17,6 +22,12 @@ class WishlistController extends Controller
         return view('client.wishlist.index', ['products' => $products]);
     }
 
+    /**
+     * Додає товар до списку бажаних користувача.
+     *
+     * @param Product $product
+     * @return RedirectResponse
+     */
     public function store(Product $product): RedirectResponse
     {
         Auth::user()->selected()->attach($product->id);
@@ -24,6 +35,12 @@ class WishlistController extends Controller
         return redirect()->route('client.wishlist.index');
     }
 
+    /**
+     * Видаляє товар зі списку бажаних користувача.
+     *
+     * @param Product $product
+     * @return RedirectResponse
+     */
     public function destroy(Product $product): RedirectResponse
     {
         Auth::user()->selected()->detach($product->id);

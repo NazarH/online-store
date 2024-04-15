@@ -1,50 +1,6 @@
 @extends('client.layouts.app')
 @section('content')
-    <div id="breadcrumb" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumb-tree">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/catalog">All Categories</a></li>
-                        @if($category->parent_id)
-                            <li>
-                                ...
-                            </li>
-                            <li>
-                                <a href="{{route('client.catalog.category', $category->parent($category->id)->first()->slug)}}">
-                                    {{$category->parent($category->id)->first()->name}}
-                                </a>
-                            </li>
-                        @endif
-                        <li>
-                            <a href="{{route('client.catalog.category', $category->slug)}}">
-                                {{$category->name}}
-                            </a>
-                        </li>
-                        @unless(empty($category->children[0]))
-
-                                <ul class="d-inline">
-                                    <span class="ml-5 mr-5"> > </span>
-                                    @foreach($category->children as $child)
-                                        <li>
-                                            <a href="{{ route('client.catalog.category', $child->slug) }}">
-                                               {{ $child->name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-
-                        @endunless
-                    </ul>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
+    {{ Breadcrumbs::render('client.catalog.category', $category) }}
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
@@ -53,169 +9,97 @@
             <div class="row">
                 <!-- ASIDE -->
                 <div id="aside" class="col-md-3">
-                    <!-- aside Widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Categories</h3>
-                        <div class="checkbox-filter">
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-1">
-                                <label for="category-1">
-                                    <span></span>
-                                    Laptops
-                                    <small>(120)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-2">
-                                <label for="category-2">
-                                    <span></span>
-                                    Smartphones
-                                    <small>(740)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-3">
-                                <label for="category-3">
-                                    <span></span>
-                                    Cameras
-                                    <small>(1450)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-4">
-                                <label for="category-4">
-                                    <span></span>
-                                    Accessories
-                                    <small>(578)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-5">
-                                <label for="category-5">
-                                    <span></span>
-                                    Laptops
-                                    <small>(120)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-6">
-                                <label for="category-6">
-                                    <span></span>
-                                    Smartphones
-                                    <small>(740)</small>
-                                </label>
+                    <form action="{{ route('client.catalog.category', $category->slug) }}" method="GET">
+                        @csrf
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Categories</h3>
+                            <div class="checkbox-filter">
+                                @foreach(\App\Models\Category::all() as $index => $category)
+                                    <div class="input-checkbox">
+                                        <input type="checkbox" id="category-{{$index}}" name="category[]" value="{{$category->id}}"
+                                            @if(Request::except(['_token']))
+                                                @checked(in_array($category->id, Request::except(['_token'])['category']))
+                                            @endif
+                                        >
+                                        <label for="category-{{$index}}">
+                                            <span></span>
+                                            {{ $category->name }}
+                                            <small>({{$category->products()->count()}})</small>
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                    </div>
-                    <!-- /aside Widget -->
+                        <!-- /aside Widget -->
 
-                    <!-- aside Widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Price</h3>
-                        <div class="price-filter">
-                            <div id="price-slider"></div>
-                            <div class="input-number price-min">
-                                <input id="price-min" type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
-                            </div>
-                            <span>-</span>
-                            <div class="input-number price-max">
-                                <input id="price-max" type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Brand</h3>
+                            <div class="checkbox-filter">
+                                @foreach(\App\Models\Brand::all() as $index => $brand)
+                                    <div class="input-checkbox">
+                                        <input type="checkbox" id="brand-{{$index}}" name="brand[]" value="{{$brand->id}}"
+                                            @if(Request::except(['_token']))
+                                                @checked(in_array($brand->id, Request::except(['_token'])['brand']))
+                                            @endif
+                                        >
+                                        <label for="brand-{{$index}}">
+                                            <span></span>
+                                            {{ $brand->name }}
+                                            <small>({{$brand->products()->count()}})</small>
+                                        </label>
+                                    </div>
+                                @endforeach
+
                             </div>
                         </div>
-                    </div>
-                    <!-- /aside Widget -->
+                        <!-- /aside Widget -->
 
-                    <!-- aside Widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Brand</h3>
-                        <div class="checkbox-filter">
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-1">
-                                <label for="brand-1">
-                                    <span></span>
-                                    SAMSUNG
-                                    <small>(578)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-2">
-                                <label for="brand-2">
-                                    <span></span>
-                                    LG
-                                    <small>(125)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-3">
-                                <label for="brand-3">
-                                    <span></span>
-                                    SONY
-                                    <small>(755)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-4">
-                                <label for="brand-4">
-                                    <span></span>
-                                    SAMSUNG
-                                    <small>(578)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-5">
-                                <label for="brand-5">
-                                    <span></span>
-                                    LG
-                                    <small>(125)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-6">
-                                <label for="brand-6">
-                                    <span></span>
-                                    SONY
-                                    <small>(755)</small>
-                                </label>
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Price</h3>
+                            <div class="price-filter">
+                                <div id="price-slider"></div>
+                                <div class="input-number price-min">
+                                    <input name="min_price" type="number"
+                                           @if(Request::except(['_token']))
+                                               value="{{ Request::except(['_token'])['min_price'] }}"
+                                           @else
+                                               value="{{ round(\App\Models\Product::min('price')) }}"
+                                           @endif
+                                    >
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
+                                <span>-</span>
+                                <div class="input-number price-max">
+                                    <input name="max_price" type="number"
+                                           @if(Request::except(['_token']))
+                                               value="{{ Request::except(['_token'])['max_price'] }}"
+                                           @else
+                                               value="{{ round(\App\Models\Product::max('price')) }}"
+                                           @endif
+                                    >
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /aside Widget -->
+                        <!-- /aside Widget -->
+
+                        <div class="aside mt-5">
+                            <button type="submit" class="btn btn-success">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+
                 </div>
                 <!-- /ASIDE -->
 
                 <!-- STORE -->
                 <div id="store" class="col-md-9">
-                    <!-- store top filter -->
-                    <div class="store-filter clearfix">
-                        <div class="store-sort">
-                            <label>
-                                Sort By:
-                                <select class="input-select">
-                                    <option value="0">Popular</option>
-                                    <option value="1">Position</option>
-                                </select>
-                            </label>
-
-                            <label>
-                                Show:
-                                <select class="input-select">
-                                    <option value="0">20</option>
-                                    <option value="1">50</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <!-- /store top filter -->
 
                     <!-- store products -->
                     <div class="row">
@@ -239,12 +123,32 @@
                                         <h4 class="product-price">{{$product->price}}<del class="product-old-price">
                                             {{$product->old_price}}</del></h4>
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                            @if(Auth::user()?->selected()->where('product_id', $product->id)->exists())
+                                                <a href="{{route('client.wishlist.index')}}" class="btn btn-success">In wishlist</a>
+                                            @else
+                                                @if(Auth::user())
+                                                    <form action="{{route('client.wishlist.store', $product->id)}}" method="POST">
+                                                        @csrf
+                                                        <button class="add-to-wishlist btn btn-primary" type="submit">
+                                                            <i class="fa fa-heart-o"></i>
+                                                            <span class="tooltipp">add to wishlist</span>
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
+                                    @unless(\App\Facades\Basket::exist($product))
+                                        <div class="add-to-cart">
+                                            <form action="{{route('client.basket.store', $product->id)}}" method="POST">
+                                                @csrf
+                                                <button class="add-to-cart-btn" type="submit">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    add to cart
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endunless
                                 </div>
                             </div>
 
@@ -265,7 +169,4 @@
         <!-- /container -->
     </div>
     <!-- /SECTION -->
-
-
-
 @endsection

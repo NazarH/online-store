@@ -10,6 +10,11 @@ use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
+    /**
+     * Показує список статей з пагінацією.
+     *
+     * @return View
+     */
     public function index(): View
     {
         $articles = Article::paginate(10);
@@ -17,7 +22,13 @@ class ArticleController extends Controller
         return view('client.articles.articles', ['articles' => $articles]);
     }
 
-    public function single(Request $request): Vieww
+    /**
+     * Показує окрему статтю разом з коментарями до неї.
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function single(Request $request): View
     {
         $article = Article::where('slug', '=', $request->slug)->first();
         $comments = Comment::where('article_id', '=', $article->id)->paginate(10);

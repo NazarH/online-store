@@ -9,6 +9,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ImportController extends Controller
 {
+    /**
+     * Метод для імпорту даних з Excel-файлу.
+     *
+     * @return RedirectResponse
+     */
     public function __invoke(): RedirectResponse
     {
         Excel::import(new MarketImport(), 'excel/export-market.xlsx');

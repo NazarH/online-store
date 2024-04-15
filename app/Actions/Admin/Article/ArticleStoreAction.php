@@ -7,10 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleStoreAction
 {
-    public function handle($data)
+    /**
+     * Створює нову статтю на основі наданих даних та пов'язує її з поточним користувачем.
+     *
+     * @param array $data Дані нової статті.
+     * @return void
+     */
+    public function handle(array $data): void
     {
         $data['user_id'] = Auth::user()->id;
 
-        Article::create($data);
+        $article = Article::create($data);
+
+        if (!empty($data['seo'])) {
+            $article->seo()->updateOrCreate(['tags' => $data['seo']]);
+        }
     }
 }

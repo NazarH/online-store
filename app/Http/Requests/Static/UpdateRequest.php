@@ -25,7 +25,8 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string',
             'text' => 'required|string',
             'type' => 'required|string',
-            'slug' => 'required|string'
+            'slug' => 'required|string',
+            'seo.*' => 'nullable|string',
         ];
     }
 }

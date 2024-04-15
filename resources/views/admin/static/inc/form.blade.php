@@ -27,6 +27,7 @@
         ]) !!}
     @endif
 
+    @include('components.metatag', ['item' => isset($page) ? $page : null])
 
     <button type="submit" class="btn btn-success">
         Submit

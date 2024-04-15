@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\View\View;
 
 class SubscribeNotify extends Mailable implements ShouldQueue
 {
@@ -23,7 +24,7 @@ class SubscribeNotify extends Mailable implements ShouldQueue
         $this->text = $text;
     }
 
-    public function build()
+    public function build(): SubscribeNotify
     {
         return $this->view('admin.emails.pattern')
             ->with([

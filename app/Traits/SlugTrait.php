@@ -7,7 +7,12 @@ use Illuminate\Support\Str;
 
 trait SlugTrait
 {
-    public static function bootSlugTrait()
+    /**
+     * Зареєструє обробник події для автоматичного створення слагу перед збереженням моделі.
+     *
+     * @return void
+     */
+    public static function bootSlugTrait(): void
     {
         static::saving(function (Model $model) {
             if (!empty($model->name)) {

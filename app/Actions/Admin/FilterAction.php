@@ -2,12 +2,18 @@
 
 namespace App\Actions\Admin;
 
-use App\Models\Product;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Request;
 
 class FilterAction
 {
-    public function handle($query)
+    /**
+     * Застосовує фільтри до вказаного запиту на основі параметрів запиту.
+     *
+     * @param Builder $query Інстанція будівника запитів
+     * @return Builder Змінений екземпляр будівника запитів
+     */
+    public function handle(Builder $query): Builder
     {
         $params = Request::except(['_method', '_token', '_f', 'type']);
 

@@ -13,6 +13,7 @@ use App\Http\Admin\Controllers\OrderController;
 use App\Http\Admin\Controllers\ProductController;
 use App\Http\Admin\Controllers\StaticController;
 use App\Http\Admin\Controllers\UserController;
+use App\Http\Admin\Controllers\XmlGenerateController;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 //Route::view('admin', 'admin.examples.home');
@@ -25,6 +26,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
     Route::get('export')
         ->uses([ExportController::class, '__invoke'])
         ->name('admin.export');
+
+    Route::get('xml-generate')
+        ->uses([XmlGenerateController::class, '__invoke'])
+        ->name('admin.xml.generate');
 
     Route::get('import')
         ->uses([ImportController::class, '__invoke'])
@@ -249,5 +254,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
                 ->uses([NotificationController::class, 'destroy'])
                 ->name('admin.leads.notifications.delete');
         });
+    });
+
+    Route::group(['prefix' => 'metatags'], function(){
+        Route::post('{item}/store')
+            ->uses([MetaController::class, 'store'])
+            ->name('admin.products.metatags');
     });
 });

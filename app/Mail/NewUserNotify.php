@@ -25,7 +25,8 @@ class NewUserNotify extends Mailable
         $this->text = $text;
     }
 
-    public function build()
+
+    public function build(): NewUserNotify
     {
         return $this->view('admin.emails.pattern')
             ->with([

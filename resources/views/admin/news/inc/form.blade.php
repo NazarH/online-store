@@ -20,6 +20,8 @@
         'label' => 'Template',
     ]) !!}
 
+    @include('components.metatag', ['item' => isset($article) ? $article : null])
+
     <button type="submit" class="btn btn-success">
         Submit
     </button>

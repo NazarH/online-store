@@ -10,11 +10,19 @@ class Footer extends Component
 {
     public $pages;
 
+    /**
+     * Створює новий екземпляр класу.
+     */
     public function __construct()
     {
         $this->pages = StaticPage::get();
     }
 
+    /**
+     * Відображає компонент.
+     *
+     * @return View
+     */
     public function render(): View
     {
         return view('components.footer', ['pages' => $this->pages]);

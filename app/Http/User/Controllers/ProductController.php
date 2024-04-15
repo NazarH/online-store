@@ -10,6 +10,12 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
+    /**
+     * Відображає сторінку продукту разом з коментарями.
+     *
+     * @param Request $request
+     * @return View
+     */
     public function index(Request $request): View
     {
         $product = Product::where('slug', '=', $request->p_slug)->first();

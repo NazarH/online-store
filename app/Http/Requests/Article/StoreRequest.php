@@ -24,17 +24,12 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'string',
-            ],
-            'text' => [
-                'required',
-                'string',
-            ],
+            'name' => 'required|string',
+            'text' => 'required|string',
             'template' => [
                 Rule::in(['standard', 'tech'])
-            ]
+            ],
+            'seo.*' => 'nullable|string',
         ];
     }
 }

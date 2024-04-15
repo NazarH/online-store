@@ -9,6 +9,12 @@ use Illuminate\View\View;
 
 class SearchController extends Controller
 {
+    /**
+     * Відображає сторінку з результатами пошуку продуктів.
+     *
+     * @param SearchRequest $request
+     * @return View
+     */
     public function index(SearchRequest $request): View
     {
         $data = $request->validated();

@@ -16,6 +16,13 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
+    /**
+     * Показує список користувачів з можливістю фільтрації та сортування.
+     *
+     * @param FilterAction $filter
+     * @param string $sortBy
+     * @return View
+     */
     public function index(FilterAction $filter, string $sortBy = 'id'): View
     {
         $query = User::query();
@@ -31,6 +38,12 @@ class UserController extends Controller
         return view('admin.users.index', ['users' => $users]);
     }
 
+    /**
+     * Сортує користувачів в залежності від обраного поля та порядку сортування.
+     *
+     * @param string $sortBy
+     * @return void
+     */
     private function sortUsers(string $sortBy)
     {
         if ($sortBy !== 'id') {
@@ -44,11 +57,23 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Показує форму для створення нового користувача.
+     *
+     * @return View
+     */
     public function create(): View
     {
         return view('admin.users.create');
     }
 
+    /**
+     * Зберігає нового користувача в базі даних.
+     *
+     * @param StoreRequest $request
+     * @param UserStoreAction $action
+     * @return RedirectResponse
+     */
     public function store(StoreRequest $request, UserStoreAction $action): RedirectResponse
     {
         $data = $request->validated();
@@ -60,6 +85,12 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
+    /**
+     * Показує форму для редагування конкретного користувача.
+     *
+     * @param User $user
+     * @return View
+     */
     public function edit(User $user): View
     {
         $avatar = $user->avatar($user->id)?->name;
@@ -67,6 +98,14 @@ class UserController extends Controller
         return view('admin.users.edit', ['user' => $user, 'avatar' => $avatar]);
     }
 
+    /**
+     * Оновлює існуючого користувача в базі даних.
+     *
+     * @param StoreRequest $request
+     * @param User $user
+     * @param UserUpdateAction $action
+     * @return RedirectResponse
+     */
     public function update(StoreRequest $request, User $user, UserUpdateAction $action): RedirectResponse
     {
         $file = $request->file('image');
@@ -77,6 +116,12 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
+    /**
+     * Видаляє конкретного користувача з бази даних.
+     *
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();

@@ -27,7 +27,7 @@ class SendNotifications extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $notifications = Notification::where('notification_date', '<=', now())
             ->whereNotIn('status', ['in_process', 'done']);

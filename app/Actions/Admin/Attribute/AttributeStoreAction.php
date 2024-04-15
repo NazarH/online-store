@@ -7,7 +7,13 @@ use App\Models\Property;
 
 class AttributeStoreAction
 {
-    public function handle($data)
+    /**
+     * Обробляє створення нового атрибута та його властивостей.
+     *
+     * @param array $data Дані для створення атрибута та його властивостей.
+     * @return void
+     */
+    public function handle(array $data): void
     {
         $attribute = Attribute::create([
             'name' => $data['name']

@@ -23,15 +23,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'string',
-                'max:30',
-            ],
-            'parent_id' => [
-                'nullable',
-                'numeric'
-            ]
+            'name' => 'required|string|max:30',
+            'parent_id' => 'nullable|numeric',
+            'seo.*' => 'nullable|string',
         ];
     }
 }

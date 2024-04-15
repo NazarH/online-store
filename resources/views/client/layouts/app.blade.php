@@ -39,6 +39,12 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <!-- Select2 -->
+
+
+        <script src="{{ asset('client/js/jquery.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     </head>
     <body>
         <div class="wrapper">
@@ -55,12 +61,15 @@
         @include('client.auth.login')
         @include('client.auth.register')
 
-        <script src="{{ asset('client/js/jquery.min.js') }}"></script>
+
         <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('client/js/slick.min.js') }}"></script>
         <script src="{{ asset('client/js/nouislider.min.js') }}"></script>
         <script src="{{ asset('client/js/jquery.zoom.min.js') }}"></script>
         <script src="{{ asset('client/js/main.js') }}"></script>
+
+
+
         <script>
             $(document).ready(function(){
                 $('.modal').addClass('hidden');

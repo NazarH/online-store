@@ -1,3 +1,14 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
 .custom-form{
     position: fixed; /* fixed, щоб модальне вікно було зафіксовано на екрані */
     top: 25%; /* розміщуємо модальне вікно по вертикалі в центрі екрану */

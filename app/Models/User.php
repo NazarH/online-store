@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,32 +45,64 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function scopeByAdmin(Builder $query)
+    /**
+     * Scope-запит для вибору користувачів з роллю адміністратора.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeByAdmin(Builder $query): Builder
     {
         return $query->where('role', '=', self::ROLE_ADMIN);
     }
 
-    public function orders()
+    /**
+     * Відношення "один до багатьох" до замовлень, що належать користувачу.
+     *
+     * @return HasMany
+     */
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
-    public function articles()
+    /**
+     * Відношення "один до багатьох" до статей, що належать користувачу.
+     *
+     * @return HasMany
+     */
+    public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
     }
 
-    public function avatar($id)
+    /**
+     * Повертає фото профілю користувача за його ідентифікатором.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function avatar(int $id): mixed
     {
         return Photo::where('model_type', 'users')->where('model_id', $id)->first();
     }
 
-    public function selected()
+    /**
+     * Відношення "багато до багатьох" до вибраних продуктів користувача.
+     *
+     * @return BelongsToMany
+     */
+    public function selected(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'select_products');
     }
 
-    public function review()
+    /**
+     * Відношення "багато до багатьох" до відгуків, що належать користувачу.
+     *
+     * @return BelongsToMany
+     */
+    public function review(): BelongsToMany
     {
         return $this->belongsToMany(Comment::class, 'user_comments');
     }
