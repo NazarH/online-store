@@ -4,9 +4,12 @@ namespace App\Actions\Admin\Attribute;
 
 use App\Models\Attribute;
 use App\Models\Property;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class AttributeAddAction
 {
+    use AsAction;
+
     /**
      * Створює нову властивість для вказаного атрибута на основі наданих даних.
      *

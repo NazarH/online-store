@@ -4,7 +4,6 @@ namespace App\Http\User\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\StaticPage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
@@ -19,7 +18,7 @@ class HomeController extends Controller
     public function index(): View
     {
         $products = Product::query()->take(4)
-            ->with('category', 'properties')
+            ->with('category', 'properties', 'images')
             ->get();
 
         return view('client.main.index', ['products' => $products]);

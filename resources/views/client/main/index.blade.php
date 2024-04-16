@@ -14,7 +14,13 @@
                                     @foreach($products as $product)
                                         <div class="product">
                                             <div class="product-img">
-                                                <img src="{{asset('client/img/product01.png')}}" alt="">
+                                                <img src="{{
+                                                    !empty($product->images[0])
+                                                        ? asset('/storage/products/'.$product->images[0]->name)
+                                                        : asset('client/img/product01.png')
+                                                  }}"
+                                                     alt=""
+                                                >
                                                 <div class="product-label">
                                                     <span class="new">NEW</span>
                                                 </div>

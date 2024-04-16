@@ -5,9 +5,12 @@ namespace App\Actions\Admin\User;
 use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class UserUpdateAction
 {
+    use AsAction;
+
     /**
      * Обробляє оновлення інформації про користувача.
      *

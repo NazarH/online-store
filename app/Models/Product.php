@@ -123,4 +123,9 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class, 'product_id', 'id');
     }
+
+    public function images()
+    {
+        return $this->hasMany(Photo::class, 'model_id', 'id');
+    }
 }

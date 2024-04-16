@@ -2,7 +2,6 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Notification\NotificationCreateAction;
 use App\Actions\Admin\Notification\NotificationSendAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Notification\StoreRequest;
@@ -38,10 +37,9 @@ class NotificationController extends Controller
      * Відправляє нове повідомлення або створює його для відправлення в майбутньому.
      *
      * @param StoreRequest $request
-     * @param NotificationSendAction $action
      * @return RedirectResponse
      */
-    public function send(StoreRequest $request, NotificationSendAction $action): RedirectResponse
+    public function send(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -50,7 +48,7 @@ class NotificationController extends Controller
             return redirect()->route('admin.leads.notifications.index');
         }
 
-        $action->handle($data);
+        NotificationSendAction::run($data);
 
         return redirect()->route('admin.leads.notifications.index');
     }

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Admin;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Request;
 
 class FilterAction

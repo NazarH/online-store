@@ -6,9 +6,12 @@ use App\Events\ConfirmOrder;
 use App\Events\NewOrderUser;
 use App\Models\Order;
 use App\Models\User;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class OrderStoreAction
 {
+    use AsAction;
+
     /**
      * Обробляє створення замовлення.
      *

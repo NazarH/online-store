@@ -44,7 +44,7 @@ class UserController extends Controller
      * @param string $sortBy
      * @return void
      */
-    private function sortUsers(string $sortBy)
+    private function sortUsers(string $sortBy): void
     {
         if ($sortBy !== 'id') {
             if (empty(Session::get('users')) || Session::get('users') === 'desc') {
@@ -103,15 +103,14 @@ class UserController extends Controller
      *
      * @param StoreRequest $request
      * @param User $user
-     * @param UserUpdateAction $action
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, User $user, UserUpdateAction $action): RedirectResponse
+    public function update(StoreRequest $request, User $user): RedirectResponse
     {
         $file = $request->file('image');
         $data = $request->validated();
 
-        $action->handle($file, $data, $user);
+        UserUpdateAction::run($file, $data, $user);
 
         return redirect()->route('admin.users.index');
     }

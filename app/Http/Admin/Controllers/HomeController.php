@@ -9,7 +9,6 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class HomeController extends Controller
 {

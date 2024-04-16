@@ -4,9 +4,12 @@ namespace App\Actions\Admin\Attribute;
 
 use App\Models\Attribute;
 use App\Models\Property;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class AttributeStoreAction
 {
+    use AsAction;
+
     /**
      * Обробляє створення нового атрибута та його властивостей.
      *

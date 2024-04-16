@@ -5,9 +5,12 @@ namespace App\Actions\Admin\Product;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class ProductCreateAction
 {
+    use AsAction;
+
     /**
      * Обробляє створення продукту.
      *

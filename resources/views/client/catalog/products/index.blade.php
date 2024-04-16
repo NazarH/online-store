@@ -6,41 +6,58 @@
             <div class="row">
                 <div class="col-md-5 col-md-push-2">
                     <div id="product-main-img">
-                        <div class="product-preview">
-                            <img src="/client/img/product01.png" alt="">
-                        </div>
+                        @if($product->images)
+                            @foreach($product->images as $image)
+                                <div class="product-preview">
+                                    <img src="{{asset('/storage/products/'.$image->name)}}" alt="">
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="product-preview">
+                                <img src="/client/img/product01.png" alt="">
+                            </div>
 
-                        <div class="product-preview">
-                            <img src="/client/img/product03.png" alt="">
-                        </div>
+                            <div class="product-preview">
+                                <img src="/client/img/product03.png" alt="">
+                            </div>
 
-                        <div class="product-preview">
-                            <img src="/client/img/product06.png" alt="">
-                        </div>
+                            <div class="product-preview">
+                                <img src="/client/img/product06.png" alt="">
+                            </div>
 
-                        <div class="product-preview">
-                            <img src="/client/img/product08.png" alt="">
-                        </div>
+                            <div class="product-preview">
+                                <img src="/client/img/product08.png" alt="">
+                            </div>
+                        @endif
+
                     </div>
                 </div>
 
                 <div class="col-md-2  col-md-pull-5">
                     <div id="product-imgs">
-                        <div class="product-preview">
-                            <img src="/client/img/product01.png" alt="">
-                        </div>
+                        @if($product->images)
+                            @foreach($product->images as $image)
+                                <div class="product-preview">
+                                    <img src="{{asset('/storage/products/'.$image->name)}}" alt="">
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="product-preview">
+                                <img src="/client/img/product01.png" alt="">
+                            </div>
 
-                        <div class="product-preview">
-                            <img src="/client/img/product03.png" alt="">
-                        </div>
+                            <div class="product-preview">
+                                <img src="/client/img/product03.png" alt="">
+                            </div>
 
-                        <div class="product-preview">
-                            <img src="/client/img/product06.png" alt="">
-                        </div>
+                            <div class="product-preview">
+                                <img src="/client/img/product06.png" alt="">
+                            </div>
 
-                        <div class="product-preview">
-                            <img src="/client/img/product08.png" alt="">
-                        </div>
+                            <div class="product-preview">
+                                <img src="/client/img/product08.png" alt="">
+                            </div>
+                        @endif
                     </div>
                 </div>
 

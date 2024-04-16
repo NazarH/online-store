@@ -103,13 +103,12 @@ class CategoryController extends Controller
      * Обробляє запит на зміну порядку категорій.
      *
      * @param Request $request
-     * @param CategoryOrderAction $action
      * @return JsonResponse
      */
-    public function order(Request $request, CategoryOrderAction $action): JsonResponse
+    public function order(Request $request): JsonResponse
     {
         $this->validate($request, ['data' => 'required|array']);
-        $action->handle($request->data);
+        CategoryOrderAction::run($request->data);
 
         return response()->json(['message' => trans('success')], Response::HTTP_ACCEPTED);
     }

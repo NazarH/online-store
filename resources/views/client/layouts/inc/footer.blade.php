@@ -20,7 +20,7 @@
                         <h3 class="footer-title">Categories</h3>
                         <ul class="footer-links">
                             @foreach(\App\Models\Category::where('parent_id', NULL)->get() as $item)
-                                <li><a href="#">{{$item->name}}</a></li>
+                                <li><a href="/catalog/{{$item->slug}}">{{$item->name}}</a></li>
                             @endforeach
 
 
@@ -45,9 +45,8 @@
                     <div class="footer">
                         <h3 class="footer-title">Service</h3>
                         <ul class="footer-links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">Help</a></li>
+                            <li><a href="/personal">My Account</a></li>
+                            <li><a href="/basket">View Cart</a></li>
                         </ul>
                     </div>
                 </div>

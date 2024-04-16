@@ -137,6 +137,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
         Route::post('/store')
             ->uses([ProductController::class, 'store'])
             ->name('admin.products.store');
+        Route::delete('image/{image}/delete')
+            ->uses([ProductController::class, 'imageDelete'])
+            ->name('admin.products.image.delete');
         Route::get('/edit/{product}')
             ->uses([ProductController::class, 'edit'])
             ->name('admin.products.edit');

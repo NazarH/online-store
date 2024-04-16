@@ -3,7 +3,6 @@
 namespace App\Http\Admin\Controllers;
 
 use App\Actions\Admin\Order\OrderStoreAction;
-use App\Actions\Admin\Order\OrderUpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\UpdateRequest;
 use App\Models\Order;
@@ -39,14 +38,13 @@ class OrderController extends Controller
      * Зберігає нове замовлення в базі даних.
      *
      * @param UpdateRequest $request
-     * @param OrderStoreAction $action
      * @return RedirectResponse
      */
-    public function store(UpdateRequest $request, OrderStoreAction $action): RedirectResponse
+    public function store(UpdateRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        $action->handle($data);
+        OrderStoreAction::run($data);
 
         Cache::forget('statistic');
 

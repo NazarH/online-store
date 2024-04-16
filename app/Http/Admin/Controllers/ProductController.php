@@ -5,14 +5,15 @@ namespace App\Http\Admin\Controllers;
 use App\Actions\Admin\FilterAction;
 use App\Actions\Admin\Product\ProductCreateAction;
 use App\Actions\Admin\Product\ProductEditAction;
-use App\Actions\Admin\Product\ProductSortAction;
 use App\Actions\Admin\Product\ProductStoreAction;
 use App\Actions\Admin\Product\ProductUpdateAction;
+use App\Actions\Admin\Product\UploadFileAction;
 use App\Facades\Currency;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateRequest;
 use App\Http\Requests\Product\StoreRequest;
 use App\Models\Category;
+use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
@@ -75,26 +76,27 @@ class ProductController extends Controller
      * Показує форму для створення нового продукту.
      *
      * @param CreateRequest $request
-     * @param ProductCreateAction $action
      * @return View
      */
-    public function create(CreateRequest $request, ProductCreateAction $action): View
+    public function create(CreateRequest $request): View
     {
-        return view('admin.products.create', $action->handle($request));
+        return view('admin.products.create', ProductCreateAction::run($request));
     }
 
     /**
      * Зберігає новий продукт в базі даних.
      *
      * @param StoreRequest $request
-     * @param ProductStoreAction $action
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, ProductStoreAction $action): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
+        $files = $request->allFiles()['images'];
 
-        $action->handle($data);
+        $product = ProductStoreAction::run($data);
+
+        UploadFileAction::run($files, $product->id);
 
         Cache::forget('statistic');
 
@@ -105,12 +107,11 @@ class ProductController extends Controller
      * Показує форму для редагування конкретного продукту.
      *
      * @param Product $product
-     * @param ProductEditAction $action
      * @return View
      */
-    public function edit(Product $product, ProductEditAction $action): View
+    public function edit(Product $product): View
     {
-        return view('admin.products.edit', $action->handle($product));
+        return view('admin.products.edit', ProductEditAction::run($product));
     }
 
     /**
@@ -123,11 +124,28 @@ class ProductController extends Controller
     public function update(StoreRequest $request, Product $product): RedirectResponse
     {
         $data = $request->validated();
+        $files = $request->allFiles()['images'];
 
         ProductUpdateAction::run($data, $product);
+
+        UploadFileAction::run($files, $product->id);
 
         $product->seo()->updateOrCreate(['tags' => $data['seo']]);
 
         return redirect()->route('admin.products.index');
+    }
+
+    /**
+     * Видаляє зображення та перенаправляє користувача на попередню сторінку.
+     *
+     * @param Photo $image Зображення, яке потрібно видалити
+     * @return RedirectResponse Перенаправлення на попередню сторінку
+     */
+    public function imageDelete(Photo $image): RedirectResponse
+    {
+        $image->delete();
+
+        return redirect()->back();
+
     }
 }

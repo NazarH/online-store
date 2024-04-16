@@ -4,9 +4,12 @@ namespace App\Actions\Admin\Article;
 
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class ArticleStoreAction
 {
+    use AsAction;
+
     /**
      * Створює нову статтю на основі наданих даних та пов'язує її з поточним користувачем.
      *

@@ -15,17 +15,17 @@
                         <div class="aside">
                             <h3 class="aside-title">Categories</h3>
                             <div class="checkbox-filter">
-                                @foreach(\App\Models\Category::all() as $index => $category)
+                                @foreach(\App\Models\Category::all() as $index => $item)
                                     <div class="input-checkbox">
-                                        <input type="checkbox" id="category-{{$index}}" name="category[]" value="{{$category->id}}"
+                                        <input type="checkbox" id="category-{{$index}}" name="category[]" value="{{$item->id}}"
                                             @if(Request::except(['_token']))
-                                                @checked(in_array($category->id, Request::except(['_token'])['category']))
+                                                @checked(!empty(Request::except(['_token'])['category']) && in_array($item->id, Request::except(['_token'])['category']))
                                             @endif
                                         >
                                         <label for="category-{{$index}}">
                                             <span></span>
-                                            {{ $category->name }}
-                                            <small>({{$category->products()->count()}})</small>
+                                            {{ $item->name }}
+                                            <small>({{$item->products()->count()}})</small>
                                         </label>
                                     </div>
                                 @endforeach
@@ -41,7 +41,7 @@
                                     <div class="input-checkbox">
                                         <input type="checkbox" id="brand-{{$index}}" name="brand[]" value="{{$brand->id}}"
                                             @if(Request::except(['_token']))
-                                                @checked(in_array($brand->id, Request::except(['_token'])['brand']))
+                                                @checked(!empty(Request::except(['_token'])['brand']) && in_array($brand->id, Request::except(['_token'])['brand']))
                                             @endif
                                         >
                                         <label for="brand-{{$index}}">
@@ -108,7 +108,13 @@
                             <div class="col-md-4">
                                 <div class="product">
                                     <div class="product-img">
-                                        <img src="{{asset('client/img/product01.png')}}" alt="">
+                                        <img src="{{
+                                                    !empty($product->images[0])
+                                                        ? asset('/storage/products/'.$product->images[0]->name)
+                                                        : asset('client/img/product01.png')
+                                                  }}"
+                                            alt=""
+                                        >
                                         <div class="product-label">
                                             <span class="new">NEW</span>
                                         </div>

@@ -116,7 +116,7 @@ class OrderController extends Controller
      * @param Request $request
      * @return void
      */
-    public function handleCallback(Request $request)
+    public function handleCallback(Request $request): void
     {
         $requestData = $request->all();
         $merchantData = json_decode($requestData['merchant_data'], true);

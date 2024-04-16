@@ -4,9 +4,12 @@ namespace App\Actions\Admin\Brand;
 
 use App\Models\Brand;
 use Illuminate\Support\Str;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class BrandUpdateAction
 {
+    use AsAction;
+
     /**
      * Обробляє оновлення інформації про бренд.
      *

@@ -6,8 +6,6 @@ use App\Actions\Admin\Article\ArticleStoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Article\StoreRequest;
 use App\Models\Article;
-use App\Services\CurrencyService;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -17,10 +15,9 @@ class ArticleController extends Controller
     /**
      * Показує список статей.
      *
-     * @param CurrencyService $service
      * @return View
      */
-    public function index(CurrencyService $service): View
+    public function index(): View
     {
         $articles = Article::query()->with('user')->paginate(10);
 
@@ -41,14 +38,13 @@ class ArticleController extends Controller
      * Зберігає нову статтю в базі даних.
      *
      * @param StoreRequest $request
-     * @param ArticleStoreAction $action
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, ArticleStoreAction $action): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        $action->handle($data);
+        ArticleStoreAction::run($data);
 
         return redirect()->route('admin.news.index');
     }

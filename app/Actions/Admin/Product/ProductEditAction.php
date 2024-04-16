@@ -4,9 +4,12 @@ namespace App\Actions\Admin\Product;
 
 use App\Models\Brand;
 use App\Models\Product;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class ProductEditAction
 {
+    use AsAction;
+
     /**
      * Обробляє редагування продукту.
      *

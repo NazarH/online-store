@@ -3,9 +3,12 @@
 namespace App\Actions\Admin\Category;
 
 use App\Models\Category;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class CategoryOrderAction
 {
+    use AsAction;
+
     /**
      * Обробляє порядок категорій.
      *

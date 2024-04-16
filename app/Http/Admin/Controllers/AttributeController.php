@@ -45,13 +45,12 @@ class AttributeController extends Controller
      * Зберігає новий атрибут в базі даних.
      *
      * @param StoreRequest $request
-     * @param AttributeStoreAction $action
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, AttributeStoreAction $action): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $action->handle($data);
+        AttributeStoreAction::run($data);
 
         return redirect()->route('admin.attributes.index');
     }
@@ -77,13 +76,12 @@ class AttributeController extends Controller
      *
      * @param UpdateRequest $request
      * @param Attribute $attribute
-     * @param AttributeUpdateAction $action
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Attribute $attribute, AttributeUpdateAction $action): RedirectResponse
+    public function update(UpdateRequest $request, Attribute $attribute): RedirectResponse
     {
         $data = $request->validated();
-        $action->handle($data, $attribute);
+        AttributeUpdateAction::run($data, $attribute);
 
         return redirect()->route('admin.attributes.index');
     }
@@ -93,13 +91,12 @@ class AttributeController extends Controller
      *
      * @param AddRequest $request
      * @param Attribute $attribute
-     * @param AttributeAddAction $action
      * @return RedirectResponse
      */
-    public function add(AddRequest $request, Attribute $attribute, AttributeAddAction $action): RedirectResponse
+    public function add(AddRequest $request, Attribute $attribute): RedirectResponse
     {
         $data = $request->validated();
-        $action->handle($data, $attribute);
+        AttributeAddAction::run($data, $attribute);
 
         return redirect()->route('admin.attributes.edit', $attribute->id);
     }
@@ -108,12 +105,11 @@ class AttributeController extends Controller
      * Видаляє конкретний атрибут з бази даних.
      *
      * @param Attribute $attribute
-     * @param AttributeDestroyAction $action
      * @return RedirectResponse
      */
-    public function destroy(Attribute $attribute, AttributeDestroyAction $action): RedirectResponse
+    public function destroy(Attribute $attribute): RedirectResponse
     {
-        $action->handle($attribute);
+        AttributeDestroyAction::run($attribute);
 
         return redirect()->route('admin.attributes.index');
     }

@@ -3,9 +3,12 @@
 namespace App\Actions\Admin\Attribute;
 
 use App\Models\Attribute;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class AttributeUpdateAction
 {
+    use AsAction;
+
     /**
      * Обробляє оновлення атрибута та його категорій.
      *

@@ -38,13 +38,12 @@ class BrandController extends Controller
      * Зберігає новий бренд в базі даних.
      *
      * @param StoreRequest $request
-     * @param BrandStoreAction $action
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, BrandStoreAction $action): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $action->handle($data);
+        BrandStoreAction::run($data);
 
         return redirect()->route('admin.brands.index');
     }
@@ -65,13 +64,12 @@ class BrandController extends Controller
      *
      * @param StoreRequest $request
      * @param Brand $brand
-     * @param BrandUpdateAction $action
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, Brand $brand, BrandUpdateAction $action): RedirectResponse
+    public function update(StoreRequest $request, Brand $brand): RedirectResponse
     {
         $data = $request->validated();
-        $action->handle($data, $brand);
+        BrandUpdateAction::run($data, $brand);
 
         return redirect()->route('admin.brands.index');
     }

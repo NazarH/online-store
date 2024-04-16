@@ -2,8 +2,6 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Static\StaticStoreAction;
-use App\Actions\Admin\Static\StaticUpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Static\StoreRequest;
 use App\Http\Requests\Static\UpdateRequest;

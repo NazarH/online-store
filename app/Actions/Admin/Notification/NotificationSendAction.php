@@ -5,9 +5,12 @@ namespace App\Actions\Admin\Notification;
 use App\Mail\SubscribeNotify;
 use App\Models\Lead;
 use Illuminate\Support\Facades\Mail;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class NotificationSendAction
 {
+    use AsAction;
+
     /**
      * Обробляє відправлення сповіщень.
      *
