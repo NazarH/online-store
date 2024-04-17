@@ -56,7 +56,7 @@ class BasketController extends Controller
 
             $user_id = Auth::user()?->id;
 
-            OrderCreateAction::run($key, $user_id);
+            $order = OrderCreateAction::run($key, $user_id);
         }
 
         $order->products()->attach($product->id);

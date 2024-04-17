@@ -105,7 +105,7 @@
                                         <a href="{{route('admin.products.edit', $product->id)}}" class="btn btn-info btn-sm mr-1">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <form action="{{route('admin.orders.delete', $product->id)}}" method="POST">
+                                        <form action="{{route('admin.products.delete', $product->id)}}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"

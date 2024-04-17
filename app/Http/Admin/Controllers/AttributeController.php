@@ -83,7 +83,7 @@ class AttributeController extends Controller
         $data = $request->validated();
         AttributeUpdateAction::run($data, $attribute);
 
-        return redirect()->route('admin.attributes.index');
+        return redirect()->back();
     }
 
     /**
@@ -111,6 +111,6 @@ class AttributeController extends Controller
     {
         AttributeDestroyAction::run($attribute);
 
-        return redirect()->route('admin.attributes.index');
+        return redirect()->back();
     }
 }

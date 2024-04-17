@@ -71,7 +71,7 @@ class BrandController extends Controller
         $data = $request->validated();
         BrandUpdateAction::run($data, $brand);
 
-        return redirect()->route('admin.brands.index');
+        return redirect()->back();
     }
 
     /**
@@ -84,6 +84,6 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        return redirect()->route('admin.brands.index');
+        return redirect()->back();
     }
 }

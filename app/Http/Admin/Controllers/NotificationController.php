@@ -77,7 +77,7 @@ class NotificationController extends Controller
 
         $notification->update($data);
 
-        return redirect()->route('admin.leads.notifications.index');
+        return redirect()->back();
     }
 
     /**
@@ -90,6 +90,6 @@ class NotificationController extends Controller
     {
         $notification->delete();
 
-        return redirect()->route('admin.leads.notifications.index');
+        return redirect()->back();
     }
 }

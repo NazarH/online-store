@@ -28,7 +28,15 @@
         'multiple' => true,
     ]) !!}
 
+    {!! Lte3::select2('value_ids[]', empty($attribute) ? null : $attribute->pluckValues(), null, [
+        'label' => 'Values',
+        'multiple' => true,
+        'disabled' => true
+    ]) !!}
+
     <button type="submit" class="btn btn-success">
         Submit
     </button>
 </form>
+
+

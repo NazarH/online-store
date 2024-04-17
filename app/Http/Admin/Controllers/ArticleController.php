@@ -77,7 +77,7 @@ class ArticleController extends Controller
             $article->seo()->updateOrCreate(['tags' => $data['seo']]);
         }
 
-        return redirect()->route('admin.news.index');
+        return redirect()->back();
     }
 
     /**
@@ -90,6 +90,6 @@ class ArticleController extends Controller
     {
         $article->delete();
 
-        return redirect()->route('admin.news.index');
+        return redirect()->back();
     }
 }

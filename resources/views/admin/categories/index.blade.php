@@ -6,9 +6,6 @@
 
     <!-- Main content -->
     <section class="content">
-
-        @include('admin.examples.inc.filter')
-
         <div class="card">
             <div class="card-body table-responsive p-0">
                 {!! Lte3::nestedset($categories, [

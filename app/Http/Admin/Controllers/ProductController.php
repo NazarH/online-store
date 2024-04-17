@@ -132,7 +132,7 @@ class ProductController extends Controller
 
         $product->seo()->updateOrCreate(['tags' => $data['seo']]);
 
-        return redirect()->route('admin.products.index');
+        return redirect()->back();
     }
 
     /**
@@ -146,6 +146,12 @@ class ProductController extends Controller
         $image->delete();
 
         return redirect()->back();
+    }
 
+    public function destroy(Product $product): RedirectResponse
+    {
+        $product->delete();
+
+        return redirect()->back();
     }
 }

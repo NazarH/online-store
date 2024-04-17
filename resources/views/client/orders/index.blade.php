@@ -43,6 +43,7 @@
                         <div class="form-group">
                             <input class="input" type="tel" name="phone" placeholder="Telephone">
                         </div>
+                        Location
                         <div class="form-group">
                             <select class="js-data-example-ajax input" name="location"></select>
                         </div>

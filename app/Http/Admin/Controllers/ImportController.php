@@ -18,6 +18,6 @@ class ImportController extends Controller
     {
         Excel::import(new MarketImport(), 'excel/export-market.xlsx');
 
-        return redirect()->route('admin.products.index');
+        return redirect()->back();
     }
 }

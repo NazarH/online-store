@@ -42,6 +42,17 @@ class Attribute extends Model
      */
     public function belongsToCategories(): array
     {
-        return $this->categories()->pluck('id')->toArray();
+        return $this->categories()->pluck('name', 'id')->toArray();
     }
+
+    public function values()
+    {
+        return $this->hasMany(Property::class);
+    }
+
+    public function pluckValues()
+    {
+        return $this->values()->pluck('value', 'id')->toArray();
+    }
+
 }

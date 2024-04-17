@@ -144,17 +144,19 @@
                                             @endif
                                         </div>
                                     </div>
-                                    @unless(\App\Facades\Basket::exist($product))
                                         <div class="add-to-cart">
-                                            <form action="{{route('client.basket.store', $product->id)}}" method="POST">
-                                                @csrf
-                                                <button class="add-to-cart-btn" type="submit">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    add to cart
-                                                </button>
-                                            </form>
+                                            @if(\App\Facades\Basket::exist($product))
+                                                <a href="{{route('client.basket.index')}}" class="btn btn-success">In cart</a>
+                                            @else
+                                                <form action="{{route('client.basket.store', $product->id)}}" method="POST">
+                                                    @csrf
+                                                    <button class="add-to-cart-btn" type="submit">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        add to cart
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
-                                    @endunless
                                 </div>
                             </div>
 

@@ -75,7 +75,7 @@ class OrderController extends Controller
 
         $order->update($data);
 
-        return redirect()->route('admin.orders.index');
+        return redirect()->back();
     }
 
     /**
@@ -90,6 +90,6 @@ class OrderController extends Controller
 
         Cache::forget('statistic');
 
-        return redirect()->route('admin.orders.index');
+        return redirect()->back();
     }
 }

@@ -82,7 +82,7 @@ class StaticController extends Controller
             $page->seo()->updateOrCreate(['tags' => $data['seo']]);
         }
 
-        return redirect()->route('admin.static.index');
+        return redirect()->back();
     }
 
     /**
@@ -95,7 +95,7 @@ class StaticController extends Controller
     {
         $page->delete();
 
-        return redirect()->route('admin.static.index');
+        return redirect()->back();
     }
 
     /**

@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-5 col-md-push-2">
                     <div id="product-main-img">
-                        @if($product->images)
+                        @if(!empty($product->images[0]))
                             @foreach($product->images as $image)
                                 <div class="product-preview">
                                     <img src="{{asset('/storage/products/'.$image->name)}}" alt="">
@@ -35,7 +35,7 @@
 
                 <div class="col-md-2  col-md-pull-5">
                     <div id="product-imgs">
-                        @if($product->images)
+                        @if(!empty($product->images[0]))
                             @foreach($product->images as $image)
                                 <div class="product-preview">
                                     <img src="{{asset('/storage/products/'.$image->name)}}" alt="">
@@ -203,53 +203,59 @@
                 </div>
 
                 @foreach($product->category()->first()->products()->take(4)->get() as $item)
-                    <div class="col-md-3 col-xs-6">
-                        <div class="product">
-                            <div class="product-img">
-                                <img src="{{asset('client/img/product01.png')}}" alt="">
-                                <div class="product-label">
-                                    <span class="sale">{{ round(((($item->price - $item->old_price) / $item->old_price) * 100)) }}%</span>
+                    @unless(\App\Facades\Basket::exist($item))
+                        <div class="col-md-3 col-xs-6">
+                            <div class="product">
+                                <div class="product-img">
+                                    <img src="{{asset('client/img/product01.png')}}" alt="">
+                                    <div class="product-label">
+                                        <span class="sale">{{ round(((($item->price - $item->old_price) / $item->old_price) * 100)) }}%</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">{{$product->category()->first()->name}}</p>
-                                <h3 class="product-name product-name-edit">
-                                    <a href="{{route('client.catalog.product', ['c_slug' => $item->category->slug, 'p_slug' => $item->slug])}}">
-                                        {{$item->name}}
-                                    </a>
-                                </h3>
-                                <h4 class="product-price">{{  $item->price }} <del class="product-old-price">{{  $item->old_price }}</del></h4>
-                                <div class="product-rating">
+                                <div class="product-body">
+                                    <p class="product-category">{{$product->category()->first()->name}}</p>
+                                    <h3 class="product-name product-name-edit">
+                                        <a href="{{route('client.catalog.product', ['c_slug' => $item->category->slug, 'p_slug' => $item->slug])}}">
+                                            {{$item->name}}
+                                        </a>
+                                    </h3>
+                                    <h4 class="product-price">{{  $item->price }} <del class="product-old-price">{{  $item->old_price }}</del></h4>
+                                    <div class="product-rating">
+                                    </div>
+                                    <div class="product-btns">
+                                        @if(Auth::user()?->selected()->where('product_id', $item->id)->exists())
+                                            <a href="{{route('client.wishlist.index')}}" class="btn btn-success">In wishlist</a>
+                                        @else
+                                            @if(Auth::user())
+                                                <form action="{{route('client.wishlist.store', $item->id)}}" method="POST">
+                                                    @csrf
+                                                    <button class="add-to-wishlist btn btn-primary" type="submit">
+                                                        <i class="fa fa-heart-o"></i>
+                                                        <span class="tooltipp">add to wishlist</span>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="product-btns">
-                                    @if(Auth::user()?->selected()->where('product_id', $item->id)->exists())
-                                        <a href="{{route('client.wishlist.index')}}" class="btn btn-success">In wishlist</a>
-                                    @else
-                                        @if(Auth::user())
-                                            <form action="{{route('client.wishlist.store', $item->id)}}" method="POST">
+
+                                    <div class="add-to-cart">
+                                        @if(\App\Facades\Basket::exist($item))
+                                            <a href="{{route('client.basket.index')}}" class="btn btn-success">In cart</a>
+                                        @else
+                                            <form action="{{route('client.basket.store', $item->id)}}" method="POST">
                                                 @csrf
-                                                <button class="add-to-wishlist btn btn-primary" type="submit">
-                                                    <i class="fa fa-heart-o"></i>
-                                                    <span class="tooltipp">add to wishlist</span>
+                                                <button class="add-to-cart-btn" type="submit">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    add to cart
                                                 </button>
                                             </form>
                                         @endif
-                                    @endif
-                                </div>
+                                    </div>
+
                             </div>
-                            @unless(\App\Facades\Basket::exist($item))
-                                <div class="add-to-cart">
-                                    <form action="{{route('client.basket.store', $item->id)}}" method="POST">
-                                        @csrf
-                                        <button class="add-to-cart-btn" type="submit">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            add to cart
-                                        </button>
-                                    </form>
-                                </div>
-                            @endunless
                         </div>
-                    </div>
+                    @endunless
                 @endforeach
 
                 <div class="clearfix visible-sm visible-xs"></div>

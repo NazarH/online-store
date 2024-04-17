@@ -149,6 +149,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
         Route::get('/{sortBy?}')
             ->uses([ProductController::class, 'index'])
             ->name('admin.products.index');
+        Route::delete('/delete/{product}')
+            ->uses([ProductController::class, 'destroy'])
+            ->name('admin.products.delete');
     });
 
     Route::group(['prefix' => 'orders'], function(){

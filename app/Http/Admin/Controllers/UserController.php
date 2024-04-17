@@ -71,14 +71,14 @@ class UserController extends Controller
      * Зберігає нового користувача в базі даних.
      *
      * @param StoreRequest $request
-     * @param UserStoreAction $action
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, UserStoreAction $action): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
+        $file = $request->file('image');
 
-        $action->handle($data);
+        UserStoreAction::run($data, $file);
 
         Cache::forget('statistic');
 
@@ -112,7 +112,7 @@ class UserController extends Controller
 
         UserUpdateAction::run($file, $data, $user);
 
-        return redirect()->route('admin.users.index');
+        return redirect()->back();
     }
 
     /**
@@ -127,6 +127,6 @@ class UserController extends Controller
 
         Cache::forget('statistic');
 
-        return redirect()->route('admin.users.index');
+        return redirect()->back();
     }
 }

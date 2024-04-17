@@ -83,7 +83,7 @@ class CategoryController extends Controller
             $category->seo()->updateOrCreate(['tags' => $data['seo']]);
         }
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->back();
     }
 
     /**
@@ -96,7 +96,7 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->back();
     }
 
     /**

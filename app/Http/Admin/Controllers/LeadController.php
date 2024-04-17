@@ -73,7 +73,7 @@ class LeadController extends Controller
         $data = $request->validated();
         $lead->update($data);
 
-        return redirect()->route('admin.leads.index');
+        return redirect()->back();
     }
 
     /**
@@ -88,6 +88,6 @@ class LeadController extends Controller
 
         Cache::forget('statistic');
 
-        return redirect()->route('admin.leads.index');
+        return redirect()->back();
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('static_pages', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->unique();
+            $table->string('type')->nullable();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->text('text')->nullable();

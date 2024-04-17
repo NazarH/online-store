@@ -6,9 +6,6 @@
 
     <!-- Main content -->
     <section class="content">
-
-        @include('admin.examples.inc.filter')
-
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">

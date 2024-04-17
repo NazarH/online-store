@@ -17,6 +17,6 @@ class XmlGenerateController extends Controller
     {
         SitemapGenerateAction::run();
 
-        return redirect()->route('admin.home');
+        return redirect()->back();
     }
 }
