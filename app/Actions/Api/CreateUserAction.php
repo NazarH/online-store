@@ -14,14 +14,15 @@ class CreateUserAction
      * Створює нового користувача на основі отриманих даних.
      *
      * @param array $data Дані нового користувача.
-     * @return void
      */
-    public function handle(array $data): void
+    public function handle(array $data)
     {
-        User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]);
+
+        return $user;
     }
 }

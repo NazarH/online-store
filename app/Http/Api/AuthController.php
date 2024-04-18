@@ -40,7 +40,8 @@ class AuthController extends Controller
 
             $user = CreateUserAction::run($data);
 
-            $this->tokenGenerate($user, $this->registerSuccess);
+            return $this->tokenGenerate($user, $this->registerSuccess);
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Bad Request'], 400);
         }
@@ -68,7 +69,7 @@ class AuthController extends Controller
 
             $user = User::where('email', '=', $data['email'])->first();
 
-            $this->tokenGenerate($user, $this->loginSuccess);
+            return $this->tokenGenerate($user, $this->loginSuccess);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Bad Request'], 400);
         }
@@ -78,12 +79,14 @@ class AuthController extends Controller
      * Перевіряє автентифікацію користувача.
      *
      * @param LoginRequest $request
-     * @return JsonResponse
+     * @return JsonResponse|NULL
      */
-    private function check(LoginRequest $request): JsonResponse
+    private function check(LoginRequest $request): JsonResponse|NULL
     {
         if (!Auth::attempt(($request->only('email', 'password')))){
             return response()->json(['error' => 'Unauthorized'], 401);
+        } else {
+            return null;
         }
     }
 
@@ -98,8 +101,8 @@ class AuthController extends Controller
     {
         return response()->json([
             'success' => $response,
-            'token' => $user->createToken('API TOKEN')], 200
-        );
+            'token' => $user->createToken('API TOKEN')
+        ], 200);
     }
 
     /**

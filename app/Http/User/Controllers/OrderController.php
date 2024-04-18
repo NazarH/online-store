@@ -7,8 +7,7 @@ use App\Facades\Basket;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderRequest;
 use App\Models\Order;
-use Cloudipsp\Checkout;
-use Cloudipsp\Configuration;
+use App\Facades\Order as OrderFacade;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -52,37 +51,10 @@ class OrderController extends Controller
         OrderStoreAction::run($data, $order);
 
         if ($data['payment'] === 'online') {
-            $this->onlinePayment($data, $order->key);
+            return redirect(OrderFacade::onlinePayment($data, $order->key)->toCheckout());
         }
 
         return redirect()->route('client.index')->withCookie(Cookie::forget('key'));
-    }
-
-    /**
-     * Викликає платіжний шлюз для онлайн-оплати замовлення.
-     *
-     * @param array $data
-     * @param string $key
-     * @return RedirectResponse
-     */
-    public function onlinePayment(array $data, string $key): RedirectResponse
-    {
-        Configuration::setMerchantId(1396424);
-        Configuration::setSecretKey('test');
-
-        $info = [
-            'currency' => 'UAH',
-            'amount' => $data['price'] * 100,
-            'response_url' => 'http://online-store.test/order/response',
-            'server_callback_url' => 'https://mighty-remotely-corgi.ngrok-free.app/webhook/order/callback',
-            'merchant_data' => array(
-                'order_key' => $key,
-            )
-        ];
-
-        $checkoutUrl = Checkout::url($info)->toCheckout();
-
-        return redirect($checkoutUrl);
     }
 
     /**

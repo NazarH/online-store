@@ -3,6 +3,7 @@
 namespace App\Http\Api;
 
 use App\Facades\Basket;
+use App\Facades\Order as OrderFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ShipmentRequest;
 use App\Http\Resources\CartResource;
@@ -65,7 +66,7 @@ class CartController extends Controller
 
             $cart = $this->orderReturn($user);
 
-            if($cart->type === 'order'){
+            if(empty($cart)){
                 $key = Str::random(40);
 
                 $cart = Order::create([
@@ -137,7 +138,7 @@ class CartController extends Controller
             $user = $this->userCheck($request);
 
             $order = $this->orderReturn($user);
-
+            dd($user, $order, $data);
             $order->update($data);
 
             return response()->json(['success' => 'Update successful'], 200);
@@ -155,14 +156,22 @@ class CartController extends Controller
      *
      * @apiSuccess {String} success Message indicating successful checkout.
      */
-    public function checkout(Request $request): JsonResponse
+    public function checkout(Request $request): JsonResponse|string
     {
         try {
             $user = $this->userCheck($request);
 
             $order = $this->orderReturn($user);
 
-            $order->update(['type' => 'order', 'payment' => 'receiving']);
+            $order->update([
+                'type' => 'order',
+                'payment' => $request->payment,
+                'price' => $order->products()->get()->sum('price')
+            ]);
+
+            if ($request->payment === 'online') {
+                return OrderFacade::onlinePayment($order->toArray(), $order->key)->getUrl();
+            }
 
             return response()->json(['success' => 'Update successful'], 200);
         } catch(\Exception $e) {
@@ -187,9 +196,9 @@ class CartController extends Controller
      * Повертає останнє замовлення користувача.
      *
      * @param Authenticatable $user
-     * @return Order
+     * @return Order|NULL
      */
-    private function orderReturn(Authenticatable $user): Order
+    private function orderReturn(Authenticatable $user): Order|NULL
     {
         return Order::where('user_id', '=', $user->id)->latest()->first();
     }
