@@ -138,7 +138,7 @@ class CartController extends Controller
             $user = $this->userCheck($request);
 
             $order = $this->orderReturn($user);
-            dd($user, $order, $data);
+
             $order->update($data);
 
             return response()->json(['success' => 'Update successful'], 200);
