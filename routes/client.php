@@ -121,12 +121,17 @@ Route::group(['middleware' => 'client.auth'], function(){
             ->uses([WishlistController::class, 'index'])
             ->name('client.wishlist.index');
 
-        Route::post('/add/{product}')
-            ->uses([WishlistController::class, 'store'])
-            ->name('client.wishlist.store');
-
-        Route::delete('/delete/{product}')
-            ->uses([WishlistController::class, 'destroy'])
-            ->name('client.wishlist.delete');
+        Route::get('/products')
+            ->uses([WishlistController::class, 'products'])
+            ->name('client.wishlist.products');
+        Route::match(['POST', 'DELETE'], '/products/{product}')
+            ->uses([WishlistController::class, 'product'])
+            ->name('client.wishlist.products.store');
+        Route::get('/articles')
+            ->uses([WishlistController::class, 'articles'])
+            ->name('client.wishlist.articles');
+        Route::match(['POST', 'DELETE'], '/articles/{article}')
+            ->uses([WishlistController::class, 'article'])
+            ->name('client.wishlist.articles.store');
     });
 });

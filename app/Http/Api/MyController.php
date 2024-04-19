@@ -3,11 +3,16 @@
 namespace App\Http\Api;
 
 use App\Actions\Api\CreatePhotoAction;
+use App\Facades\Favorite as FavoriteFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\StoreRequest;
+use App\Http\Resources\FavoriteArticleResource;
 use App\Http\Resources\FavoriteResource;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\ProfileResource;
+use App\Models\Article;
+use App\Models\Favorite;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +23,9 @@ use Illuminate\Support\Facades\Auth;
 
 class MyController extends Controller
 {
+    private string $product = 'App\Models\Product';
+    private string $article = 'App\Models\Article';
+
     /**
      * Get user profile information or create a new user profile.
      *
@@ -87,30 +95,83 @@ class MyController extends Controller
     }
 
     /**
-     * Get user's favorite items.
-     *
-     * @api {get} /my/favorites Get User Favorites
-     * @apiName GetUserFavorites
+     * @api {get} /my/products Get User Favorite Products
+     * @apiName GetUserFavoriteProducts
      * @apiGroup User
      *
-     * @apiSuccess {Object[]} favorites List of user's favorite items.
-     * @apiSuccess {String} favorites.name Favorite item name.
-     * @apiSuccess {String} favorites.price Favorite item price.
-     * @apiSuccess {String} favorites.count Favorite item count.
+     * @apiSuccess {Object[]} success List of user's favorite products.
      *
-     * @apiError {String} error Message indicating unauthorized access.
+     * @apiParam {Request} $request Request object.
      */
-    public function favorites(Request $request): JsonResponse|AnonymousResourceCollection
+    public function products(Request $request)
     {
         $user = $this->userCheck($request);
 
-        $favorites = $user->selected()->get();
+        $favorites = Favorite::where('user_id', $user->id)->where('model_type', '=', $this->product)->with('product')->get();
 
-        if ($user) {
-            return FavoriteResource::collection($favorites);
-        } else {
-            return response()->json(['error' => 'Unauthenticated'], 401);
+        $products = [];
+
+        foreach ($favorites as $favorite)
+        {
+            $products[] = new FavoriteResource($favorite->product);
         }
+
+        return response()->json(['success' => $products], 200);
+    }
+
+    /**
+     * @api {get} /my/articles Get User Favorite Articles
+     * @apiName GetUserFavoriteArticles
+     * @apiGroup User
+     *
+     * @apiSuccess {Object[]} success List of user's favorite articles.
+     *
+     * @apiParam {Request} $request Request object.
+     *
+     */
+    public function articles(Request $request)
+    {
+        $user = $this->userCheck($request);
+
+        $favorites = Favorite::where('user_id', $user->id)->where('model_type', '=', $this->article)->with('article')->get();
+
+        $articles = [];
+
+        foreach ($favorites as $favorite)
+        {
+            $articles[] = new FavoriteArticleResource($favorite->article);
+        }
+        return response()->json(['success' => $articles], 200);
+    }
+
+    /**
+     * @api {post} /my/product Toggle Favorite Product
+     * @apiName ToggleFavoriteProduct
+     * @apiGroup User
+     *
+     * @apiParam {Request} $request Request object.
+     */
+    public function product(Request $request)
+    {
+        $user_id = $this->userCheck($request)->id;
+        $product = Product::find($request->product);
+
+        return FavoriteFacade::toggle($product, $user_id);
+    }
+
+    /**
+     * @api {post} /my/article Toggle Favorite Article
+     * @apiName ToggleFavoriteArticle
+     * @apiGroup User
+     *
+     * @apiParam {Request} $request Request object.
+     */
+    public function article(Request $request)
+    {
+        $user_id = $this->userCheck($request)->id;
+        $article = Article::find($request->article);
+
+        return FavoriteFacade::toggle($article, $user_id);
     }
 
     /**

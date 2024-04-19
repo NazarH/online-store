@@ -20,6 +20,19 @@
                 <div class="col-12 col-md-6">
                     <!-- Blog Content -->
                     <div class="single-blog-content">
+                        @if(\App\Models\Favorite::search($article)->first() )
+                            <a href="{{route('client.wishlist.index')}}" class="btn btn-success mb-5">In wishlist</a>
+                        @else
+                            @if(Auth::user())
+                                <form action="{{route('client.wishlist.articles.store', $article->id)}}" method="POST">
+                                    @csrf
+                                    <button class="add-to-wishlist btn btn-primary  mb-5" type="submit">
+                                        <i class="fa fa-heart-o"></i>
+                                        <span class="tooltipp">add to wishlist</span>
+                                    </button>
+                                </form>
+                            @endif
+                        @endif
                         <div class="line"></div>
                         <h4><a href="{{route('client.articles.single', $article->slug)}}" class="post-headline">{{$article->name}}</a></h4>
                         <p>
@@ -30,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     @endforeach

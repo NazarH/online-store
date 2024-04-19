@@ -223,11 +223,11 @@
                                     <div class="product-rating">
                                     </div>
                                     <div class="product-btns">
-                                        @if(Auth::user()?->selected()->where('product_id', $item->id)->exists())
+                                        @if(\App\Models\Favorite::search($item)->first() )
                                             <a href="{{route('client.wishlist.index')}}" class="btn btn-success">In wishlist</a>
                                         @else
                                             @if(Auth::user())
-                                                <form action="{{route('client.wishlist.store', $item->id)}}" method="POST">
+                                                <form action="{{route('client.wishlist.products.store', $item->id)}}" method="POST">
                                                     @csrf
                                                     <button class="add-to-wishlist btn btn-primary" type="submit">
                                                         <i class="fa fa-heart-o"></i>

@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Documentation for my API",
     "title": "My API",
-    "url": "http://online-store.test/api",
+    "url": "/api",
     "sampleUrl": false,
     "header": {
         "title": "My API",

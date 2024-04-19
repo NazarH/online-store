@@ -73,8 +73,22 @@ Route::group(['prefix' => 'my'], function(){
         ->uses([MyController::class, 'profile']);
     Route::get('orders')
         ->uses([MyController::class, 'orders']);
-    Route::get('favorites')
-        ->uses([MyController::class, 'favorites']);
+
+    Route::group(['prefix' => 'favorites'], function(){
+        Route::group(['prefix' => 'products'], function(){
+            Route::get('')
+                ->uses([MyController::class, 'products']);
+            Route::post('{product}')
+                ->uses([MyController::class, 'product']);
+        });
+        Route::group(['prefix' => 'articles'], function(){
+            Route::get('')
+                ->uses([MyController::class, 'articles']);
+            Route::post('{article}')
+                ->uses([MyController::class, 'article']);
+        });
+    });
+
 });
 
 Route::group(['prefix' => 'cart'], function(){

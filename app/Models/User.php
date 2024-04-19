@@ -88,16 +88,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Відношення "багато до багатьох" до вибраних продуктів користувача.
-     *
-     * @return BelongsToMany
-     */
-    public function selected(): BelongsToMany
-    {
-        return $this->belongsToMany(Product::class, 'select_products');
-    }
-
-    /**
      * Відношення "багато до багатьох" до відгуків, що належать користувачу.
      *
      * @return BelongsToMany

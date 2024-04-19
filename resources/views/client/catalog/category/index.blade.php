@@ -129,11 +129,11 @@
                                         <h4 class="product-price">{{$product->price}}<del class="product-old-price">
                                             {{$product->old_price}}</del></h4>
                                         <div class="product-btns">
-                                            @if(Auth::user()?->selected()->where('product_id', $product->id)->exists())
+                                            @if(\App\Models\Favorite::search($product)->first() )
                                                 <a href="{{route('client.wishlist.index')}}" class="btn btn-success">In wishlist</a>
                                             @else
                                                 @if(Auth::user())
-                                                    <form action="{{route('client.wishlist.store', $product->id)}}" method="POST">
+                                                    <form action="{{route('client.wishlist.products.store', $product->id)}}" method="POST">
                                                         @csrf
                                                         <button class="add-to-wishlist btn btn-primary" type="submit">
                                                             <i class="fa fa-heart-o"></i>

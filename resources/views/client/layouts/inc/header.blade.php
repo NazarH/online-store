@@ -91,7 +91,7 @@
                                 <a href="{{route('client.wishlist.index')}}">
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
-                                    <div class="qty">{{ Auth::user()->selected()->count() }}</div>
+                                    <div class="qty">{{ \App\Models\Favorite::where('user_id', Auth::user()->id)->count() }}</div>
                                 </a>
                             </div>
                         @endguest
