@@ -2,12 +2,12 @@
 
 namespace App\Http\User\Controllers;
 
-use App\Actions\User\Order\OrderStoreAction;
+use App\Actions\Order\OrderStoreAction;
 use App\Facades\Basket;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Order\OrderRequest;
-use App\Models\Order;
 use App\Facades\Order as OrderFacade;
+use App\Http\Controllers\Controller;
+use App\Http\User\Requests\ClientOrderStoreRequest;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -37,11 +37,11 @@ class OrderController extends Controller
     /**
      * Оновлює статус замовлення та викликає метод оплати онлайн.
      *
-     * @param OrderRequest $request
+     * @param ClientOrderStoreRequest $request
      * @param Order $order
      * @return RedirectResponse
      */
-    public function update(OrderRequest $request, Order $order): RedirectResponse
+    public function update(ClientOrderStoreRequest $request, Order $order): RedirectResponse
     {
         $data = $request->validated();
         $data['status'] = 'expected';

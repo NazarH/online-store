@@ -18,11 +18,6 @@ class PageController extends Controller
      *
      * @apiParam {String} slug Page slug.
      *
-     * @apiSuccess {Number} id Page ID.
-     * @apiSuccess {String} type Page type.
-     * @apiSuccess {String} name Page name.
-     * @apiSuccess {String} slug Page slug.
-     * @apiSuccess {String} text Page text.
      */
     public function page(Request $request): PageResource
     {

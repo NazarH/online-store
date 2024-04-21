@@ -3,7 +3,7 @@
 namespace App\Http\User\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Review\StoreRequest;
+use App\Http\User\Requests\ReviewStoreRequest;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
@@ -14,11 +14,11 @@ class CommentController extends Controller
     /**
      * Зберігає коментар для статті.
      *
-     * @param StoreRequest $request
+     * @param ReviewStoreRequest $request
      * @param Article $article
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, Article $article): RedirectResponse
+    public function store(ReviewStoreRequest $request, Article $article): RedirectResponse
     {
         $data = $request->validated();
         $data['article_id'] = $article->id;

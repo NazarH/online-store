@@ -14,13 +14,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use Fomvasss\Seo\Models\HasSeo;
+use Fomvasss\MediaLibraryExtension\HasMedia\HasMedia;
+use Fomvasss\MediaLibraryExtension\HasMedia\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, SlugTrait, HasSeo;
+    use HasFactory, SoftDeletes, SlugTrait, HasSeo, InteractsWithMedia;
 
     protected $guarded = ['id'];
-
+    protected array $mediaSingleCollections = ['images'];
+    protected array $mediaMultipleCollections = ['images'];
     /**
      * Повертає масив значень тегів SEO за замовчуванням для продукту.
      *

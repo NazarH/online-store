@@ -2,6 +2,7 @@
 
 namespace App\Http\Admin\Controllers;
 
+use App\Http\Admin\Requests\ProductImportRequest;
 use App\Http\Controllers\Controller;
 use App\Imports\MarketImport;
 use Illuminate\Http\RedirectResponse;
@@ -14,9 +15,11 @@ class ImportController extends Controller
      *
      * @return RedirectResponse
      */
-    public function __invoke(): RedirectResponse
+    public function __invoke(ProductImportRequest $request): RedirectResponse
     {
-        Excel::import(new MarketImport(), 'excel/export-market.xlsx');
+        $data = $request->validated();
+
+        Excel::import(new MarketImport(), $data['file']);
 
         return redirect()->back();
     }

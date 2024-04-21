@@ -3,7 +3,7 @@
 namespace App\Http\User\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Client\UpdateRequest;
+use App\Http\User\Requests\ClientUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -23,11 +23,11 @@ class PersonalController extends Controller
     /**
      * Оновлює дані користувача.
      *
-     * @param UpdateRequest $request
+     * @param ClientUpdateRequest $request
      * @param User $user
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, User $user): RedirectResponse
+    public function update(ClientUpdateRequest $request, User $user): RedirectResponse
     {
         $data = $request->validated();
 

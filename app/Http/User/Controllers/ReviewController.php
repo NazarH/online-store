@@ -3,7 +3,7 @@
 namespace App\Http\User\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Review\StoreRequest;
+use App\Http\User\Requests\ReviewStoreRequest;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -14,11 +14,11 @@ class ReviewController extends Controller
     /**
      * Зберігає новий коментар для продукту.
      *
-     * @param StoreRequest $request
+     * @param ReviewStoreRequest $request
      * @param Product $product
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, Product $product): RedirectResponse
+    public function store(ReviewStoreRequest $request, Product $product): RedirectResponse
     {
         $data = $request->validated();
         $data['product_id'] = $product->id;

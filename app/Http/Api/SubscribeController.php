@@ -19,8 +19,6 @@ class SubscribeController extends Controller
      *
      * @apiParam {String} email User's email address.
      *
-     * @apiSuccess {String} success Message indicating successful subscription.
-     * @apiError {String} error Message indicating failure to subscribe.
      */
     public function subscribe(Request $request): JsonResponse
     {

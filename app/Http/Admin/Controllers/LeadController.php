@@ -2,8 +2,8 @@
 
 namespace App\Http\Admin\Controllers;
 
+use App\Http\Admin\Requests\LeadStoreRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Lead\StoreRequest;
 use App\Models\Lead;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
@@ -36,10 +36,10 @@ class LeadController extends Controller
     /**
      * Зберігає нового ліда в базі даних.
      *
-     * @param StoreRequest $request
+     * @param LeadStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(LeadStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -64,11 +64,11 @@ class LeadController extends Controller
     /**
      * Оновлює існуючого ліда в базі даних.
      *
-     * @param StoreRequest $request
+     * @param LeadStoreRequest $request
      * @param Lead $lead
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, Lead $lead): RedirectResponse
+    public function update(LeadStoreRequest $request, Lead $lead): RedirectResponse
     {
         $data = $request->validated();
         $lead->update($data);

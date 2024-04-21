@@ -1,4 +1,4 @@
-<form action="/login" method="POST" id="loginModal" class="hidden w-25 custom-form">
+<div id="loginModal" class="hidden w-25 custom-form">
     @csrf
     <div class="card-body">
         <div class="d-flex justify-content-between">
@@ -12,26 +12,26 @@
             </div>
         @endif
         {!! Lte3::formOpen(['action' => '/login', 'method' => 'POST']) !!}
-        {!! Lte3::text('email', null, [
-            'type' => 'email',
-            'placeholder' => 'Email',
-            'label' => '',
-            'class_wrap' => 'mb-3',
-        ]) !!}
-        {!! Lte3::text('password', null, [
-           'type' => 'password',
-           'placeholder' => 'Password',
-           'label' => '',
-           'class_wrap' => 'mb-3',
-       ]) !!}
-        <div class="row">
-            <div class="col-8">
-                {!! Lte3::checkbox('remember', null, ['label' => 'Remember Me', 'class_wrap' => 'icheck-primary']) !!}
+            {!! Lte3::text('email', null, [
+                'type' => 'email',
+                'placeholder' => 'Email',
+                'label' => '',
+                'class_wrap' => 'mb-3',
+            ]) !!}
+            {!! Lte3::text('password', null, [
+               'type' => 'password',
+               'placeholder' => 'Password',
+               'label' => '',
+               'class_wrap' => 'mb-3',
+           ]) !!}
+            <div class="row">
+                <div class="col-8">
+                    {!! Lte3::checkbox('remember', null, ['label' => 'Remember Me', 'class_wrap' => 'icheck-primary']) !!}
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
             </div>
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-            </div>
-        </div>
         {!! Lte3::formClose() !!}
 
         <p class="mb-1">
@@ -41,5 +41,5 @@
             <a href="/register" class="text-center">Register</a>
         </p>
     </div>
-</form>
+</div>
 

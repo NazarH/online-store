@@ -2,9 +2,9 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Notification\NotificationSendAction;
+use App\Actions\Notification\NotificationSendAction;
+use App\Http\Admin\Requests\NotificationStoreRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Notification\StoreRequest;
 use App\Models\Notification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -36,10 +36,10 @@ class NotificationController extends Controller
     /**
      * Відправляє нове повідомлення або створює його для відправлення в майбутньому.
      *
-     * @param StoreRequest $request
+     * @param NotificationStoreRequest $request
      * @return RedirectResponse
      */
-    public function send(StoreRequest $request): RedirectResponse
+    public function send(NotificationStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -67,11 +67,11 @@ class NotificationController extends Controller
     /**
      * Оновлює існуюче повідомлення в базі даних.
      *
-     * @param StoreRequest $request
+     * @param NotificationStoreRequest $request
      * @param Notification $notification
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, Notification $notification): RedirectResponse
+    public function update(NotificationStoreRequest $request, Notification $notification): RedirectResponse
     {
         $data = $request->validated();
 

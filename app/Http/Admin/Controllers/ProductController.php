@@ -2,19 +2,19 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\FilterAction;
-use App\Actions\Admin\Product\ProductCreateAction;
-use App\Actions\Admin\Product\ProductEditAction;
-use App\Actions\Admin\Product\ProductStoreAction;
-use App\Actions\Admin\Product\ProductUpdateAction;
-use App\Actions\Admin\Product\UploadFileAction;
+use App\Actions\FilterAction;
+use App\Actions\Product\ProductCreateAction;
+use App\Actions\Product\ProductEditAction;
+use App\Actions\Product\ProductStoreAction;
+use App\Actions\Product\ProductUpdateAction;
 use App\Facades\Currency;
+use App\Http\Admin\Requests\ProductCreateRequest;
+use App\Http\Admin\Requests\ProductStoreRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\CreateRequest;
-use App\Http\Requests\Product\StoreRequest;
 use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Product;
+use Fomvasss\MediaLibraryExtension\MediaManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
@@ -75,10 +75,10 @@ class ProductController extends Controller
     /**
      * Показує форму для створення нового продукту.
      *
-     * @param CreateRequest $request
+     * @param ProductCreateRequest $request
      * @return View
      */
-    public function create(CreateRequest $request): View
+    public function create(ProductCreateRequest $request): View
     {
         return view('admin.products.create', ProductCreateAction::run($request));
     }
@@ -86,17 +86,20 @@ class ProductController extends Controller
     /**
      * Зберігає новий продукт в базі даних.
      *
-     * @param StoreRequest $request
+     * @param ProductStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(ProductStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $files = $request->allFiles()['images'];
 
         $product = ProductStoreAction::run($data);
+        //        if (!empty($request->allFiles()['images'])) {
+      //      $files = $request->allFiles()['images'];
+        //    UploadFileAction::run($files, $product->id);
+        // }
 
-        UploadFileAction::run($files, $product->id);
+        $product->mediaManage($request);
 
         Cache::forget('statistic');
 
@@ -117,19 +120,21 @@ class ProductController extends Controller
     /**
      * Оновлює існуючий продукт в базі даних.
      *
-     * @param StoreRequest $request
+     * @param ProductStoreRequest $request
      * @param Product $product
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, Product $product): RedirectResponse
+    public function update(ProductStoreRequest $request, Product $product): RedirectResponse
     {
         $data = $request->validated();
-        $files = $request->allFiles()['images'];
+
+      // if (!empty($request->allFiles()['images'])) {
+      //      $files = $request->allFiles()['images'];
+        //    UploadFileAction::run($files, $product->id);
+        //}
+        $product->mediaManage($request);
 
         ProductUpdateAction::run($data, $product);
-
-        UploadFileAction::run($files, $product->id);
-
         $product->seo()->updateOrCreate(['tags' => $data['seo']]);
 
         return redirect()->back();

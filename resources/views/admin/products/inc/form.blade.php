@@ -1,10 +1,10 @@
 @if(!empty($product->images[0]))
     <div class="d-flex mb-5">
-        @foreach($product->images as $image)
+        @foreach($product->media as $image)
             <form action="{{route('admin.products.image.delete', $image->id)}}" method="POST" class="d-flex flex-column">
                 @csrf
                 @method('delete')
-                <img src="{{ asset('storage/products/'.$image->name) }}" alt="" class="mr-5 ml-5 mb-3" style="width: 150px; height: 150px;">
+                <img src="{{ asset('storage/products/'.$image->file_name) }}" alt="" class="mr-5 ml-5 mb-3" style="width: 150px; height: 150px;">
                 <button type="submit" class="btn btn-danger align-self-center">Delete</button>
             </form>
         @endforeach
@@ -13,11 +13,11 @@
 
 <form action="{{route($route, $product->id ?? null)}}" method="POST" enctype="multipart/form-data">
     @csrf
-
-    {!! Lte3::mediaImage('images', null, [
-        'label' => 'Images',
-        'multiple' => true
-    ]) !!}
+    {!! Lte3::mediaFile('images', isset($product) ? $product : null, [
+            'label' => 'Зображення',
+            'multiple' => true,
+            'is_image' => true,
+        ]) !!}
 
     {!! Lte3::text('name', $product->name ?? null, [
         'type' => 'text',

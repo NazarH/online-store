@@ -5,7 +5,7 @@
         'type' => 'text',
         'max' => '30',
         'label' => 'Name',
-        'placeholder' => 'Order Name',
+        'placeholder' => 'User Name',
     ]) !!}
 
     {!! Lte3::text('email', $order->email ?? null, [

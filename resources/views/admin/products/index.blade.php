@@ -8,8 +8,16 @@
     <section class="content">
         <div class="card">
             <div class="btn-group d-flex align-items-center justify-content-start" role="group">
-                <a href="{{route('admin.export')}}" class="btn btn-primary">Скачати</a>
-                <a href="{{route('admin.import')}}" class="btn btn-secondary">Завантажити</a>
+                <a href="{{ route('admin.export') }}" class="btn btn-secondary btn-import">Скачати</a>
+                <form id="importForm" action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="btn-group d-flex align-items-center justify-content-start" role="group">
+
+                        <button type="button" class="btn btn-primary btn-import" onclick="document.getElementById('fileInput').click();">Завантажити</button>
+                        <input type="file" id="fileInput" name="file" style="display: none;" onchange="document.getElementById('importForm').submit();">
+                    </div>
+                </form>
+
             </div>
         </div>
 

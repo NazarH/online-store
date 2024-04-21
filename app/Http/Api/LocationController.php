@@ -18,7 +18,6 @@ class LocationController extends Controller
      *
      * @apiParam {String} q Search query for city name.
      *
-     * @apiSuccess {Object[]} locations List of locations matching the search query.
      */
     public function search(Request $request): JsonResponse
     {

@@ -4,7 +4,7 @@ use App\Http\Api\AuthController;
 use App\Http\Api\CartController;
 use App\Http\Api\CategoryController;
 use App\Http\Api\LocationController;
-use App\Http\Api\MyController;
+use App\Http\Api\ProfileController;
 use App\Http\Api\PageController;
 use App\Http\Api\ProductController;
 use App\Http\Api\SubscribeController;
@@ -70,22 +70,22 @@ Route::group(['prefix' => 'auth'], function(){
 
 Route::group(['prefix' => 'my'], function(){
     Route::match(['GET', 'POST'], 'profile')
-        ->uses([MyController::class, 'profile']);
+        ->uses([ProfileController::class, 'profile']);
     Route::get('orders')
-        ->uses([MyController::class, 'orders']);
+        ->uses([ProfileController::class, 'orders']);
 
     Route::group(['prefix' => 'favorites'], function(){
         Route::group(['prefix' => 'products'], function(){
             Route::get('')
-                ->uses([MyController::class, 'products']);
+                ->uses([ProfileController::class, 'products']);
             Route::post('{product}')
-                ->uses([MyController::class, 'product']);
+                ->uses([ProfileController::class, 'product']);
         });
         Route::group(['prefix' => 'articles'], function(){
             Route::get('')
-                ->uses([MyController::class, 'articles']);
+                ->uses([ProfileController::class, 'articles']);
             Route::post('{article}')
-                ->uses([MyController::class, 'article']);
+                ->uses([ProfileController::class, 'article']);
         });
     });
 

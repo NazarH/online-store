@@ -100,7 +100,7 @@
                             <a href="{{route('client.basket.index')}}">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
-                                <div class="qty">{{ \App\Models\Order::where('key', '=', Cookie::get('key'))->first()->products()->count() }}</div>
+                                <div class="qty">{{ \App\Models\Order::where('key', '=', Cookie::get('key'))->first()?->products()->count() }}</div>
                             </a>
                         </div>
 

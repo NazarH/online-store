@@ -40,4 +40,9 @@ class HomeController extends Controller
             ];
         });
     }
+
+    public function logs()
+    {
+        return view('admin.logs.index');
+    }
 }

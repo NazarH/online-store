@@ -24,7 +24,6 @@ class ProductController extends Controller
      * @apiParam {String} [sort] Field to sort by (e.g., "name", "price").
      * @apiParam {String} [order] Sort order ("asc" or "desc").
      *
-     * @apiSuccess {Object[]} products List of products.
      */
     public function products(Request $request): AnonymousResourceCollection
     {

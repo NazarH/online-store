@@ -25,11 +25,18 @@ class MarkerExport implements FromCollection, WithHeadings
                     'Price_Old' => $product->old_price,
                     'Attributes' => implode(' | ', $product->properties()->get()->map(
                         function ($property) {
-                            return $property->attribute()->first()->name.': '.$property->value;
+                            $name = !empty($property->attribute()->first()->name) ? $property->attribute()->first()->name : '';
+
+                            return $name.': '.$property->value;
                         }
                     )->toArray()),
                     'Brand' => $product->brand->name ?? '',
                     'Category' => $product->category->name ?? '',
+                    'Images' => !empty($product->images()->first()) ? implode(' | ', $product->images()->get()->map(
+                        function ($image) {
+                            return $image->name;
+                        }
+                    )->toArray()) : '',
                 ];
             });
     }
@@ -46,7 +53,8 @@ class MarkerExport implements FromCollection, WithHeadings
             'Price_Old',
             'Attributes',
             'Brand',
-            'Category'
+            'Category',
+            'Images'
         ];
     }
 }

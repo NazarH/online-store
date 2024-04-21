@@ -17,10 +17,6 @@ class CategoryController extends Controller
      * @apiName GetAllCategories
      * @apiGroup Categories
      *
-     * @apiSuccess {Object[]} categories List of categories.
-     * @apiSuccess {Number} categories.id Category ID.
-     * @apiSuccess {String} categories.name Category name.
-     * @apiSuccess {String} categories.slug Category slug.
      */
     public function all(): AnonymousResourceCollection
     {
@@ -38,9 +34,6 @@ class CategoryController extends Controller
      *
      * @apiParam {String} slug Category slug.
      *
-     * @apiSuccess {Number} id Category ID.
-     * @apiSuccess {String} name Category name.
-     * @apiSuccess {String} slug Category slug.
      */
     public function category(Request $request): CategoryResource
     {

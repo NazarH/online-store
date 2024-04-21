@@ -25,9 +25,6 @@ class CartController extends Controller
      * @apiName RetrieveCart
      * @apiGroup Cart
      *
-     * @apiSuccess {Object[]} products List of products in the cart.
-     * @apiSuccess {String} products.name Product name.
-     * @apiSuccess {Number} products.price Product price.
      */
     public function cart(Request $request): JsonResponse|ResourceCollection|NULL
     {
@@ -57,7 +54,6 @@ class CartController extends Controller
      *
      * @apiParam {Number} productId Product ID.
      *
-     * @apiSuccess {String} success Message indicating successful addition.
      */
     public function add(Request $request): JsonResponse
     {
@@ -100,7 +96,6 @@ class CartController extends Controller
      *
      * @apiParam {Number} productId Product ID.
      *
-     * @apiSuccess {String} success Message indicating successful removal.
      */
     public function remove(Request $request): JsonResponse
     {
@@ -128,7 +123,6 @@ class CartController extends Controller
      * @apiParam {String} city Shipping city.
      * @apiParam {String} country Shipping country.
      *
-     * @apiSuccess {String} success Message indicating successful update.
      */
     public function shipping(ShipmentRequest $request): JsonResponse
     {
@@ -154,7 +148,6 @@ class CartController extends Controller
      * @apiName CheckoutCart
      * @apiGroup Cart
      *
-     * @apiSuccess {String} success Message indicating successful checkout.
      */
     public function checkout(Request $request): JsonResponse|string
     {

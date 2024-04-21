@@ -2,14 +2,14 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Attribute\AttributeAddAction;
-use App\Actions\Admin\Attribute\AttributeDestroyAction;
-use App\Actions\Admin\Attribute\AttributeStoreAction;
-use App\Actions\Admin\Attribute\AttributeUpdateAction;
+use App\Actions\Attribute\AttributeAddAction;
+use App\Actions\Attribute\AttributeDestroyAction;
+use App\Actions\Attribute\AttributeStoreAction;
+use App\Actions\Attribute\AttributeUpdateAction;
+use App\Http\Admin\Requests\AttributeAddRequest;
+use App\Http\Admin\Requests\AttributeStoreRequest;
+use App\Http\Admin\Requests\AttributeUpdateRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Attribute\AddRequest;
-use App\Http\Requests\Attribute\StoreRequest;
-use App\Http\Requests\Attribute\UpdateRequest;
 use App\Models\Attribute;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
@@ -44,10 +44,10 @@ class AttributeController extends Controller
     /**
      * Зберігає новий атрибут в базі даних.
      *
-     * @param StoreRequest $request
+     * @param AttributeStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(AttributeStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
         AttributeStoreAction::run($data);
@@ -74,11 +74,11 @@ class AttributeController extends Controller
     /**
      * Оновлює існуючий атрибут в базі даних.
      *
-     * @param UpdateRequest $request
+     * @param AttributeUpdateRequest $request
      * @param Attribute $attribute
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Attribute $attribute): RedirectResponse
+    public function update(AttributeUpdateRequest $request, Attribute $attribute): RedirectResponse
     {
         $data = $request->validated();
         AttributeUpdateAction::run($data, $attribute);
@@ -89,11 +89,11 @@ class AttributeController extends Controller
     /**
      * Додає значення до атрибуту.
      *
-     * @param AddRequest $request
+     * @param AttributeAddRequest $request
      * @param Attribute $attribute
      * @return RedirectResponse
      */
-    public function add(AddRequest $request, Attribute $attribute): RedirectResponse
+    public function add(AttributeAddRequest $request, Attribute $attribute): RedirectResponse
     {
         $data = $request->validated();
         AttributeAddAction::run($data, $attribute);

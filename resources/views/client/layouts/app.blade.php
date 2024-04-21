@@ -47,6 +47,7 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     </head>
     <body>
+
         <div class="wrapper">
             @include('client.layouts.inc.header')
 
@@ -55,20 +56,19 @@
             </main>
 
             @include('client.layouts.inc.footer')
+
         </div>
 
         <div class="back-ground hidden" id="backForForm"></div>
-        @include('client.auth.login')
-        @include('client.auth.register')
 
+        @include('client.auth.login', ['errors' => $errors])
+        @include('client.auth.register', ['errors' => $errors])
 
         <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('client/js/slick.min.js') }}"></script>
         <script src="{{ asset('client/js/nouislider.min.js') }}"></script>
         <script src="{{ asset('client/js/jquery.zoom.min.js') }}"></script>
         <script src="{{ asset('client/js/main.js') }}"></script>
-
-
 
         <script>
             $(document).ready(function(){

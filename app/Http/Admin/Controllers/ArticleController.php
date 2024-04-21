@@ -2,9 +2,9 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Article\ArticleStoreAction;
+use App\Actions\Article\ArticleStoreAction;
+use App\Http\Admin\Requests\ArticleStoreRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Article\StoreRequest;
 use App\Models\Article;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -37,10 +37,10 @@ class ArticleController extends Controller
     /**
      * Зберігає нову статтю в базі даних.
      *
-     * @param StoreRequest $request
+     * @param ArticleStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(ArticleStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -63,11 +63,11 @@ class ArticleController extends Controller
     /**
      * Оновлює існуючу статтю в базі даних.
      *
-     * @param StoreRequest $request
+     * @param ArticleStoreRequest $request
      * @param Article $article
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, Article $article): RedirectResponse
+    public function update(ArticleStoreRequest $request, Article $article): RedirectResponse
     {
         $data = $request->validated();
 

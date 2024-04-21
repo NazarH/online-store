@@ -27,7 +27,6 @@
         <div class="container">
             <!-- row -->
             <div class="row">
-
                 <div class="col-md-7">
                     <!-- Billing Details -->
                     <div class="billing-details">
@@ -35,23 +34,50 @@
                             <h3 class="title">Billing address</h3>
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="name" placeholder="First Name / Last Name">
+                            <input class="input form-control @error('name') is-invalid @enderror" type="text" name="name" placeholder="First Name / Last Name" value="{{ old('name') }}">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+
                         <div class="form-group">
-                            <input class="input" type="email" name="email" placeholder="Email">
+                            <input class="input form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+
                         <div class="form-group">
-                            <input class="input" type="tel" name="phone" placeholder="Telephone">
+                            <input class="input form-control @error('phone') is-invalid @enderror" type="tel" name="phone" placeholder="Telephone" value="{{ old('phone') }}">
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+
                         Location
                         <div class="form-group">
-                            <select class="js-data-example-ajax input" name="location"></select>
+                            <select class="js-data-example-ajax input form-control @error('location') is-invalid @enderror" name="location"></select>
+                            @error('location')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <input class="input" type="number" name="number" placeholder="Postal Number">
+                            <input class="input form-control @error('name') is-invalid @enderror" type="number" name="number" placeholder="Postal Number" value="{{ old('number') }}">
                         </div>
-
+                        @error('number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <div class="form-group">
                             <div class="input-checkbox">
                                 <input type="checkbox" id="create-account">
@@ -104,20 +130,21 @@
                     </div>
                     <div class="payment-method">
                         <div class="input-radio">
-                            <input type="radio" name="payment" id="payment-1" value="receiving">
-                            <label for="payment-1">
+
+                            <input type="radio" name="payment" id="payment-2" value="online" class="form-control" checked>
+                            <label for="payment-2">
                                 <span></span>
-                                Payment upon receipt
+                                Payment online
                             </label>
                             <div class="caption">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             </div>
                         </div>
                         <div class="input-radio">
-                            <input type="radio" name="payment" id="payment-2" value="online">
-                            <label for="payment-2">
+                            <input type="radio" name="payment" id="payment-1" value="receiving" class="form-control">
+                            <label for="payment-1">
                                 <span></span>
-                                Payment online
+                                Payment upon receipt
                             </label>
                             <div class="caption">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>

@@ -2,7 +2,7 @@
 
 @section('content')
     @include('admin.parts.content-header', [
-        'page_title' => 'Нова стаття',
+        'page_title' => 'Нове замовлення',
     ])
 
     <!-- Main content -->

@@ -189,6 +189,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'XmlParser' => Orchestra\Parser\Xml\Facade::class,
+        'MediaManager' => \Fomvasss\MediaLibraryExtension\Facade::class,
     ])->toArray(),
 
 ];

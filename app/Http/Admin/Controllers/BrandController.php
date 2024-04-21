@@ -2,10 +2,10 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Brand\BrandStoreAction;
-use App\Actions\Admin\Brand\BrandUpdateAction;
+use App\Actions\Brand\BrandStoreAction;
+use App\Actions\Brand\BrandUpdateAction;
+use App\Http\Admin\Requests\BrandStoreRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Brand\StoreRequest;
 use App\Models\Brand;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -37,10 +37,10 @@ class BrandController extends Controller
     /**
      * Зберігає новий бренд в базі даних.
      *
-     * @param StoreRequest $request
+     * @param BrandStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(BrandStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
         BrandStoreAction::run($data);
@@ -62,11 +62,11 @@ class BrandController extends Controller
     /**
      * Оновлює існуючий бренд в базі даних.
      *
-     * @param StoreRequest $request
+     * @param BrandStoreRequest $request
      * @param Brand $brand
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, Brand $brand): RedirectResponse
+    public function update(BrandStoreRequest $request, Brand $brand): RedirectResponse
     {
         $data = $request->validated();
         BrandUpdateAction::run($data, $brand);

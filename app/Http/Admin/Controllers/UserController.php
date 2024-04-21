@@ -2,16 +2,16 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\FilterAction;
-use App\Actions\Admin\User\UserStoreAction;
-use App\Actions\Admin\User\UserUpdateAction;
+use App\Actions\FilterAction;
+use App\Actions\User\UserStoreAction;
+use App\Actions\User\UserUpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\StoreRequest;
+use App\Http\User\Requests\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -70,10 +70,10 @@ class UserController extends Controller
     /**
      * Зберігає нового користувача в базі даних.
      *
-     * @param StoreRequest $request
+     * @param UserStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(UserStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $file = $request->file('image');
@@ -101,11 +101,11 @@ class UserController extends Controller
     /**
      * Оновлює існуючого користувача в базі даних.
      *
-     * @param StoreRequest $request
+     * @param UserStoreRequest $request
      * @param User $user
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, User $user): RedirectResponse
+    public function update(UserStoreRequest $request, User $user): RedirectResponse
     {
         $file = $request->file('image');
         $data = $request->validated();

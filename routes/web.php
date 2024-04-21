@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 require __DIR__ . '/admin.php';
 require __DIR__ . '/client.php';
 

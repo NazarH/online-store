@@ -8,7 +8,7 @@
                     <div class="row align-items-center" >
                         <img src="/vendor/adminlte/dist/img/AdminLTELogo.png" alt="Logo" class="brand-image img-circle elevation-3 ml-2" style="opacity: .8">
 
-                        <a href="{{route('admin.logs')}}" class="d-block font-weight-bold ml-2" target="_blank">
+                        <a href="{{route('admin.logs')}}" class="d-block font-weight-bold ml-2">
                             Логи
                         </a>
                     </div>

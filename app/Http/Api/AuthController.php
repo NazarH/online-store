@@ -30,8 +30,6 @@ class AuthController extends Controller
      * @apiParam {String} email User's email.
      * @apiParam {String} password User's password.
      *
-     * @apiSuccess {String} success Message indicating successful registration.
-     * @apiSuccess {String} token Generated API token.
      */
     public function register(RegisterRequest $request): JsonResponse
     {
@@ -57,8 +55,6 @@ class AuthController extends Controller
      * @apiParam {String} email User's email.
      * @apiParam {String} password User's password.
      *
-     * @apiSuccess {String} success Message indicating successful login.
-     * @apiSuccess {String} token Generated API token.
      */
     public function login(LoginRequest $request): JsonResponse
     {
@@ -80,6 +76,8 @@ class AuthController extends Controller
      *
      * @param LoginRequest $request
      * @return JsonResponse|NULL
+     *
+     * @apiIgnore
      */
     private function check(LoginRequest $request): JsonResponse|NULL
     {
@@ -114,8 +112,6 @@ class AuthController extends Controller
      *
      * @apiParam {String} email User's email.
      *
-     * @apiSuccess {String} success Message indicating successful link sending.
-     * @apiError {String} error Message indicating failure in sending the link.
      */
     public function email(AuthEmailRequest $request): JsonResponse
     {
@@ -149,6 +145,8 @@ class AuthController extends Controller
      *
      * @apiSuccess {String} success Message indicating successful password reset.
      * @apiError {String} error Message indicating failure in password reset.
+     *
+     * @apiIgnore
      */
     public function reset(AuthResetRequest $request): JsonResponse
     {

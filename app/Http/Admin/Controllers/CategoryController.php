@@ -2,9 +2,9 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Category\CategoryOrderAction;
+use App\Actions\Category\CategoryOrderAction;
+use App\Http\Admin\Requests\CategoryStoreRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\StoreRequest;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -39,10 +39,10 @@ class CategoryController extends Controller
     /**
      * Зберігає нову категорію в базі даних.
      *
-     * @param StoreRequest $request
+     * @param CategoryStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(CategoryStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -69,11 +69,11 @@ class CategoryController extends Controller
     /**
      * Оновлює існуючу категорію в базі даних.
      *
-     * @param StoreRequest $request
+     * @param CategoryStoreRequest $request
      * @param Category $category
      * @return RedirectResponse
      */
-    public function update(StoreRequest $request, Category $category): RedirectResponse
+    public function update(CategoryStoreRequest $request, Category $category): RedirectResponse
     {
         $data = $request->validated();
 

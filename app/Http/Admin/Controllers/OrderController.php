@@ -2,9 +2,9 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Actions\Admin\Order\OrderStoreAction;
+use App\Actions\Order\OrderStoreAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Order\UpdateRequest;
+use App\Http\User\Requests\ClientOrderUpdateRequest;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
@@ -37,10 +37,10 @@ class OrderController extends Controller
     /**
      * Зберігає нове замовлення в базі даних.
      *
-     * @param UpdateRequest $request
+     * @param ClientOrderUpdateRequest $request
      * @return RedirectResponse
      */
-    public function store(UpdateRequest $request): RedirectResponse
+    public function store(ClientOrderUpdateRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -65,11 +65,11 @@ class OrderController extends Controller
     /**
      * Оновлює існуюче замовлення в базі даних.
      *
-     * @param UpdateRequest $request
+     * @param ClientOrderUpdateRequest $request
      * @param Order $order
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Order $order): RedirectResponse
+    public function update(ClientOrderUpdateRequest $request, Order $order): RedirectResponse
     {
         $data = $request->validated();
 

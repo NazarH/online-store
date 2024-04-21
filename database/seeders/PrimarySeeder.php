@@ -31,7 +31,7 @@ class PrimarySeeder extends Seeder
             StaticPage::factory()->create(
                 [
                     'type' => $page,
-                    'title' => $page,
+                    'name' => $page,
                     'slug' => $page
                 ]
             );

@@ -2,9 +2,9 @@
 
 namespace App\Http\Admin\Controllers;
 
+use App\Http\Admin\Requests\StaticStoreRequest;
+use App\Http\Admin\Requests\StaticUpdateRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Static\StoreRequest;
-use App\Http\Requests\Static\UpdateRequest;
 use App\Models\StaticPage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -38,10 +38,10 @@ class StaticController extends Controller
     /**
      * Зберігає нову статичну сторінку в базі даних.
      *
-     * @param StoreRequest $request
+     * @param StaticStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(StaticStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -68,11 +68,11 @@ class StaticController extends Controller
     /**
      * Оновлює існуючу статичну сторінку в базі даних.
      *
-     * @param UpdateRequest $request
+     * @param StaticUpdateRequest $request
      * @param StaticPage $page
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, StaticPage $page): RedirectResponse
+    public function update(StaticUpdateRequest $request, StaticPage $page): RedirectResponse
     {
         $data = $request->validated();
 

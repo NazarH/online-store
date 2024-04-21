@@ -9,11 +9,13 @@
 - Create .conf file in laradock folder - nginx/sites
 - Edit hosts file. Write "sudo nano /etc/hosts" in terminal , and add "127.0.0.1       online-store.test" to file
 - Run docker container with command "docker-compose up -d nginx mysql phpmyadmin redis workspace"
-In container, in project repository:
+In container, in project repository
 - composer install
 - npm install
 - npm run dev
 - php artisan migrate
+- php artisan storage:link
+- php artisan lte3:link
 - php artisan db:seed --class=PrimarySeeder
 - php artisan db:seed --class=DummySeeder
 - Install ngrok (and register a new account)

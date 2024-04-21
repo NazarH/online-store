@@ -2,19 +2,19 @@
 
 namespace App\Http\User\Controllers;
 
-use App\Actions\User\Basket\OrderCreateAction;
+use App\Actions\Basket\OrderCreateAction;
 use App\Facades\Basket;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request as BasketRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Http\Request as BasketRequest;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class BasketController extends Controller

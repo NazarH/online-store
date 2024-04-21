@@ -19,9 +19,13 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 //Route::view('admin', 'admin.examples.home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
-    Route::get('logs')
+    Route::get('')
+        ->uses([HomeController::class, '__invoke'])
+        ->name('admin.home');
+
+    Route::get('iframe')
         ->uses([LogViewerController::class, 'index'])
-        ->name('admin.logs');
+        ->name('admin.iframe');
 
     Route::get('export')
         ->uses([ExportController::class, '__invoke'])
@@ -31,13 +35,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
         ->uses([XmlGenerateController::class, '__invoke'])
         ->name('admin.xml.generate');
 
-    Route::get('import')
+    Route::post('import')
         ->uses([ImportController::class, '__invoke'])
         ->name('admin.import');
 
-    Route::get('')
-        ->uses([HomeController::class, '__invoke'])
-        ->name('admin.home');
+    Route::get('logs')
+        ->uses([HomeController::class, 'logs'])
+        ->name('admin.logs');
 
     Route::group(['prefix' => 'users'], function(){
         Route::get('/create')
