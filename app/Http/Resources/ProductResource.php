@@ -21,7 +21,10 @@ class ProductResource extends JsonResource
             'old_price' => $this->old_price,
             'article' => $this->article,
             'count' => $this->count,
-            'slug' => $this->slug
+            'slug' => $this->slug,
+            'url' => collect($this->getMedia('images')->all())->map(function($item){
+               return $item->getUrl('thumb');
+            })
         ];
     }
 }
