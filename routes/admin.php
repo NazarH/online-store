@@ -6,7 +6,7 @@ use App\Http\Admin\Controllers\BrandController;
 use App\Http\Admin\Controllers\CategoryController;
 use App\Http\Admin\Controllers\ExportController;
 use App\Http\Admin\Controllers\HomeController;
-use App\Http\Admin\Controllers\ImportController;
+use App\Http\Admin\Controllers\ProductImportController;
 use App\Http\Admin\Controllers\LeadController;
 use App\Http\Admin\Controllers\NotificationController;
 use App\Http\Admin\Controllers\OrderController;
@@ -18,7 +18,7 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 //Route::view('admin', 'admin.examples.home');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth.role'], function(){
     Route::get('')
         ->uses([HomeController::class, '__invoke'])
         ->name('admin.home');
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function(){
         ->name('admin.xml.generate');
 
     Route::post('import')
-        ->uses([ImportController::class, '__invoke'])
+        ->uses([ProductImportController::class, '__invoke'])
         ->name('admin.import');
 
     Route::get('logs')

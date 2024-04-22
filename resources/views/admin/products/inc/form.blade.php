@@ -1,13 +1,8 @@
-@if(!empty($product->images[0]))
-    <div class="d-flex mb-5">
-        @foreach($product->media as $image)
-            <form action="{{route('admin.products.image.delete', $image->id)}}" method="POST" class="d-flex flex-column">
-                @csrf
-                @method('delete')
-                <img src="{{ asset('storage/products/'.$image->file_name) }}" alt="" class="mr-5 ml-5 mb-3" style="width: 150px; height: 150px;">
-                <button type="submit" class="btn btn-danger align-self-center">Delete</button>
-            </form>
-        @endforeach
+@if(!empty($product))
+    <div class="card mb-3 text-center">
+        <a href="{{route('client.catalog.product', ['c_slug' => $product->category->slug, 'p_slug' => $product->slug])}}" class="pb-3 pt-3" target="_blank">
+            PRODUCT PAGE
+        </a>
     </div>
 @endif
 

@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-3">
             {!! Lte3::text('email', request('email'), [
-                'type' => 'email',
+                'type' => 'text',
                 'label' => 'Email'
             ]) !!}
         </div>

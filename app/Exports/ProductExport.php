@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class MarkerExport implements FromCollection, WithHeadings
+class ProductExport implements FromCollection, WithHeadings
 {
     /**
      * @return Collection
@@ -15,7 +15,7 @@ class MarkerExport implements FromCollection, WithHeadings
     public function collection(): Collection
     {
         return Product::query()
-            ->with(['brand', 'category'])
+            ->with(['brand', 'category', 'properties'])
             ->get()
             ->map(function ($product) {
                 return [
@@ -23,20 +23,15 @@ class MarkerExport implements FromCollection, WithHeadings
                     'Article' => $product->article,
                     'Price' => $product->price,
                     'Price_Old' => $product->old_price,
-                    'Attributes' => implode(' | ', $product->properties()->get()->map(
-                        function ($property) {
-                            $name = !empty($property->attribute()->first()->name) ? $property->attribute()->first()->name : '';
-
-                            return $name.': '.$property->value;
-                        }
-                    )->toArray()),
-                    'Brand' => $product->brand->name ?? '',
-                    'Category' => $product->category->name ?? '',
-                    'Images' => !empty($product->images()->first()) ? implode(' | ', $product->images()->get()->map(
-                        function ($image) {
-                            return $image->name;
-                        }
-                    )->toArray()) : '',
+                    'Attributes' => implode(' | ', $product->properties->map(function ($property) {
+                        $name = optional($property->attribute)->name ?: '';
+                        return $name . ': ' . $property->value;
+                    })->toArray()),
+                    'Brand' => $product->brand?->name ?? '',
+                    'Category' => $product->category?->name ?? '',
+                    'Images' => collect($product->getMedia('images')->all())->map(function($item){
+                        return $item->getUrl('thumb');
+                    })
                 ];
             });
     }

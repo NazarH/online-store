@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MarketImport implements ToCollection, WithHeadingRow
+class ProductImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param Collection $collection
@@ -43,7 +43,7 @@ class MarketImport implements ToCollection, WithHeadingRow
             }
         }
 
-        return redirect()->route('admin.home');
+        return redirect()->back();
     }
 
     /**

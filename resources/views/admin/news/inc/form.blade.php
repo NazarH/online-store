@@ -8,6 +8,11 @@
         'placeholder' => 'Brand Name',
     ]) !!}
 
+    {!! Lte3::textarea('short', $article->text ?? null, [
+        'label' => 'Short  article',
+        'class' => 'f-cke-full',
+    ]) !!}
+
     {!! Lte3::textarea('text', $article->text ?? null, [
         'label' => 'Text of article',
         'class' => 'f-cke-full',

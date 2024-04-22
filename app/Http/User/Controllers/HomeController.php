@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index(): View
     {
         $products = Product::query()->take(4)
-            ->with('category', 'properties', 'images')
+            ->with('category', 'properties')
             ->get();
 
         return view('client.main.index', ['products' => $products]);

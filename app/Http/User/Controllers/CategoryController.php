@@ -21,9 +21,9 @@ class CategoryController extends Controller
         $category = Category::where('slug', '=', $request->slug)->first();
 
         if ($request->all()) {
-            $products = Product::filter()->with('images')->paginate(9);
+            $products = Product::filter()->paginate(9);
         } else {
-            $products = $category->products()->with('images')->paginate(9);
+            $products = $category->products()->paginate(9);
         }
 
         return view('client.catalog.category.index', ['category' => $category, 'products' => $products]);

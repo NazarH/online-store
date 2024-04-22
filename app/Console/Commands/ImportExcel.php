@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Imports\MarketImport;
+use App\Imports\ProductImport;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -29,6 +29,6 @@ class ImportExcel extends Command
     {
         ini_set('memory_limit', '-1');
 
-        Excel::import(new MarketImport(), 'export-market.xlsx');
+        Excel::import(new ProductImport(), 'export-market.xlsx');
     }
 }

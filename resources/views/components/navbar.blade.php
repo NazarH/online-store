@@ -97,7 +97,7 @@
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <a href="/admin/profile" class="btn btn-default btn-flat">Profile</a>
+                    <a href="{{route('client.personal.index')}}" class="btn btn-default btn-flat" target="_blank">Profile</a>
                     <a href="/" class="btn btn-default btn-flat">Home</a>
                     <a href="/logout" class="btn btn-default btn-flat float-right js-click-submit"
                        data-confirm="Logout?">Sign out</a>

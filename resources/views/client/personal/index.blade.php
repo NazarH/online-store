@@ -16,6 +16,20 @@
             'help' => '* Enter Your Phone Number',
         ]) !!}
 
+        {!! Lte3::text('password', null, [
+               'type' => 'password',
+               'placeholder' => 'Password',
+               'label' => 'New Password',
+               'class_wrap' => 'mb-3',
+           ]) !!}
+
+        {!! Lte3::text('password_confirmation', null, [
+           'type' => 'password',
+           'placeholder' => 'Password confirmation',
+           'label' => 'Repeat Password',
+           'class_wrap' => 'mb-3',
+       ]) !!}
+
         {!! Lte3::text('address', Auth::user()->address) !!}
 
         <button type="submit" class="btn btn-success">

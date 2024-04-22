@@ -15,10 +15,11 @@ class AdminPanelMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (empty(auth()->user()) || !(auth()->user()->role === 'admin')){
+        if (empty(auth()->user()) || !in_array(auth()->user()->role, config('roles.adminPanelRoles'))) {
             return redirect()->route('login');
         }
 
         return $next($request);
+
     }
 }

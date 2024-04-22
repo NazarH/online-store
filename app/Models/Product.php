@@ -59,17 +59,6 @@ class Product extends Model implements HasMedia
     }
 
     /**
-     * Відношення "один до одного" до метатегів продукту.
-     *
-     * @return HasOne
-     */
-    public function metatags(): HasOne
-    {
-        return $this->hasOne(Metatag::class, 'model_id', 'id')
-            ->where('model_type', '=', get_class($this));
-    }
-
-    /**
      * Повертає атрибути, що відносяться до категорії, до якої належить продукт.
      *
      * @return BelongsToMany
@@ -101,17 +90,21 @@ class Product extends Model implements HasMedia
 
         foreach ($params as $key => $value) {
             if (!empty($value)) {
-                if ($key === 'category') {
-                    $query->whereIn('category_id', Arr::wrap($value));
-                }
-                if ($key === 'brand') {
-                    $query->whereIn('brand_id', Arr::wrap($value));
-                }
-                if ($key === 'min_price') {
-                    $query->where('price', '>=', $value);
-                }
-                if ($key === 'max_price') {
-                    $query->where('price', '<=', $value);
+                switch ($key) {
+                    case 'category':
+                        $query->whereIn('category_id', Arr::wrap($value));
+                        break;
+                    case 'brand':
+                        $query->whereIn('brand_id', Arr::wrap($value));
+                        break;
+                    case 'min_price':
+                        $query->where('price', '>=', $value);
+                        break;
+                    case 'max_price':
+                        $query->where('price', '<=', $value);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -125,10 +118,5 @@ class Product extends Model implements HasMedia
     public function reviews(): HasMany
     {
         return $this->hasMany(Comment::class, 'product_id', 'id');
-    }
-
-    public function images()
-    {
-        return $this->hasMany(Photo::class, 'model_id', 'id');
     }
 }

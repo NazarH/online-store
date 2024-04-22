@@ -4,11 +4,11 @@ namespace App\Http\Admin\Controllers;
 
 use App\Http\Admin\Requests\ProductImportRequest;
 use App\Http\Controllers\Controller;
-use App\Imports\MarketImport;
+use App\Imports\ProductImport;
 use Illuminate\Http\RedirectResponse;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ImportController extends Controller
+class ProductImportController extends Controller
 {
     /**
      * Метод для імпорту даних з Excel-файлу.
@@ -19,7 +19,7 @@ class ImportController extends Controller
     {
         $data = $request->validated();
 
-        Excel::import(new MarketImport(), $data['file']);
+        Excel::import(new ProductImport(), $data['file']);
 
         return redirect()->back();
     }

@@ -25,7 +25,7 @@ class OrderService
             'currency' => 'UAH',
             'amount' => $data['price'] * 100,
             'response_url' => route('client.order.response'),
-            'server_callback_url' => env('NGROK_URL').'/webhook/order/callback',
+            'server_callback_url' => config('app.url').'/webhook/order/callback',
             'merchant_data' => array(
                 'order_key' => $key,
             )

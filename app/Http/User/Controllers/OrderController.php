@@ -4,10 +4,10 @@ namespace App\Http\User\Controllers;
 
 use App\Actions\Order\OrderStoreAction;
 use App\Facades\Basket;
-use App\Facades\Order as OrderFacade;
 use App\Http\Controllers\Controller;
 use App\Http\User\Requests\ClientOrderStoreRequest;
 use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -16,6 +16,13 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
+    protected $service;
+
+    public function __construct(OrderService $orderService)
+    {
+        $this->service = $orderService;
+    }
+
     /**
      * Перевіряє наявність замовлення за ключем. Якщо замовлення відсутнє, перенаправляє на головну сторінку.
      * В іншому випадку відображає сторінку з деталями замовлення.
@@ -51,7 +58,7 @@ class OrderController extends Controller
         OrderStoreAction::run($data, $order);
 
         if ($data['payment'] === 'online') {
-            return redirect(OrderFacade::onlinePayment($data, $order->key)->toCheckout());
+            return redirect($this->service->onlinePayment($data, $order->key)->toCheckout());
         }
 
         return redirect()->route('client.index')->withCookie(Cookie::forget('key'));

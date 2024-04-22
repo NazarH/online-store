@@ -4,9 +4,17 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {!!
+            \Seo::setGroup(app()->getLocale())
+                ->setDefault([
+                    'og_site_name' => config('app.name'),
+                    'og_url' => URL::full(),
+                    'og_locale' => app()->getLocale(),
+                ])->renderHtml()
+        !!}
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Electro - HTML Ecommerce Template</title>
+        <title>Electro</title>
 
         <!-- Bootstrap -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -61,8 +69,8 @@
 
         <div class="back-ground hidden" id="backForForm"></div>
 
-        @include('client.auth.login', ['errors' => $errors])
-        @include('client.auth.register', ['errors' => $errors])
+        @include('client.auth.login')
+        @include('client.auth.register')
 
         <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('client/js/slick.min.js') }}"></script>

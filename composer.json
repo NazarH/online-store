@@ -24,7 +24,7 @@
         "orchestra/parser": "^8.0",
         "rap2hpoutre/laravel-log-viewer": "^2.4",
         "spatie/laravel-medialibrary": "10.15.0",
-        "spatie/laravel-permission": "^6.4",
+        "spatie/laravel-permission": "^6.7",
         "spatie/laravel-sitemap": "^7.2"
     },
     "require-dev": {

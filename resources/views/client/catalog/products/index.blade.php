@@ -78,19 +78,19 @@
                             </span>
                         </div>
 
-                        @if($product->count)
-                            <div class="add-to-cart">
-                                <div class="qty-label">
-                                    Qty
-                                    <div class="input-number">
-                                        <input type="number" value="1" max="{{$product->count}}">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
-                                    </div>
-                                </div>
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </div>
-                        @endif
+                        <div class="add-to-cart">
+                            @if(\App\Facades\Basket::exist($product))
+                                <a href="{{route('client.basket.index')}}" class="btn btn-success">In cart</a>
+                            @else
+                                <form action="{{route('client.basket.store', $product->id)}}" method="POST">
+                                    @csrf
+                                    <button class="add-to-cart-btn" type="submit">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        add to cart
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
 
                         <ul class="product-links">
                             <li>Category:</li>
