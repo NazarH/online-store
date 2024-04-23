@@ -19,8 +19,13 @@ class ProductController extends Controller
     public function index(Request $request): View
     {
         $product = Product::where('slug', '=', $request->p_slug)->first();
+
+        $images = $product->getMedia('images')->map(function ($image) {
+            return $image->getUrl();
+        });
+
         $comments = Comment::where('product_id', '=', $product->id)->paginate(5);
 
-        return view('client.catalog.products.index', ['product' => $product, 'comments' => $comments]);
+        return view('client.catalog.products.index', ['product' => $product, 'comments' => $comments, 'images' => $images]);
     }
 }

@@ -94,10 +94,6 @@ class ProductController extends Controller
         $data = $request->validated();
 
         $product = ProductStoreAction::run($data);
-        // if (!empty($request->allFiles()['images'])) {
-        //    $files = $request->allFiles()['images'];
-        //    UploadFileAction::run($files, $product->id);
-        // }
 
         $product->mediaManage($request);
 

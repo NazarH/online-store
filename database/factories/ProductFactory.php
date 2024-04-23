@@ -5,7 +5,9 @@ namespace Database\Factories;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -19,7 +21,7 @@ class ProductFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         $categoryId = Category::inRandomOrder()->first()->id;
         $brandId = Brand::inRandomOrder()->first()->id;
@@ -34,5 +36,18 @@ class ProductFactory extends Factory
             'category_id' => $categoryId,
             'brand_id' => $brandId
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Product $product) {
+            for ($i = 0; $i < 3; $i++) {
+                $imageName = 'image_' . $i . '.jpg';
+
+                $product->addMediaFromUrl('https://picsum.photos/460/460')
+                    ->usingFileName($imageName)
+                    ->toMediaCollection('images');
+            }
+        });
     }
 }

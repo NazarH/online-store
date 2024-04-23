@@ -6,10 +6,10 @@
             <div class="row">
                 <div class="col-md-5 col-md-push-2">
                     <div id="product-main-img">
-                        @if(!empty($product->images[0]))
-                            @foreach($product->images as $image)
+                        @if(!empty($images))
+                            @foreach($images as $image)
                                 <div class="product-preview">
-                                    <img src="{{asset('/storage/products/'.$image->name)}}" alt="">
+                                    <img src="{{$image}}" alt="">
                                 </div>
                             @endforeach
                         @else
@@ -35,10 +35,10 @@
 
                 <div class="col-md-2  col-md-pull-5">
                     <div id="product-imgs">
-                        @if(!empty($product->images[0]))
-                            @foreach($product->images as $image)
+                        @if(!empty($images))
+                            @foreach($images as $image)
                                 <div class="product-preview">
-                                    <img src="{{asset('/storage/products/'.$image->name)}}" alt="">
+                                    <img src="{{$image}}" alt="">
                                 </div>
                             @endforeach
                         @else

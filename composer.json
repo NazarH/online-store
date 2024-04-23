@@ -13,7 +13,7 @@
         "fomvasss/laravel-medialibrary-extension": "^5.8",
         "fomvasss/laravel-seo": "^1.7",
         "fomvasss/laravel-variables": "^5.3",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.8",
         "kalnoy/nestedset": "^6.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
