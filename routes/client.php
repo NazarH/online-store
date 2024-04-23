@@ -5,6 +5,7 @@ use App\Http\User\Controllers\BasketController;
 use App\Http\User\Controllers\CatalogController;
 use App\Http\User\Controllers\CategoryController;
 use App\Http\User\Controllers\CommentController;
+use App\Http\User\Controllers\FeedbackController;
 use App\Http\User\Controllers\HomeController;
 use App\Http\User\Controllers\OrderController;
 use App\Http\User\Controllers\PageController;
@@ -106,6 +107,16 @@ Route::group(['prefix' => 'order'], function(){
 });
 
 Route::group(['middleware' => 'client.auth'], function(){
+    Route::group(['prefix' => 'feedback'], function(){
+        Route::get('')
+            ->uses([FeedbackController::class, 'index'])
+            ->name('feedback.index');
+
+        Route::post('/store')
+            ->uses([FeedbackController::class, 'store'])
+            ->name('feedback.store');
+    });
+
     Route::group(['prefix' => 'personal'], function(){
         Route::get('')
             ->uses([PersonalController::class, 'index'])

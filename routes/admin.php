@@ -225,9 +225,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.role'], function(){
     });
 
     Route::group(['prefix' => 'leads'], function(){
-        Route::get('')
-            ->uses([LeadController::class, 'index'])
-            ->name('admin.leads.index');
         Route::get('/create')
             ->uses([LeadController::class, 'create'])
             ->name('admin.leads.create');
@@ -243,6 +240,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.role'], function(){
         Route::delete('/delete/{lead}')
             ->uses([LeadController::class, 'destroy'])
             ->name('admin.leads.delete');
+        Route::get('/{sortBy?}')
+            ->uses([LeadController::class, 'index'])
+            ->name('admin.leads.index');
 
         Route::group(['prefix' => 'notification'], function(){
             Route::get('')

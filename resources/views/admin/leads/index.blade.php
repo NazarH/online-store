@@ -6,6 +6,8 @@
 
     <!-- Main content -->
     <section class="content">
+        @include('admin.leads.inc.filter')
+
         <section class="card">
             <div class="card-header">
                 <h3 class="card-title">
@@ -19,8 +21,16 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Type</th>
+                        <th>
+                            <a href="{{ route('admin.leads.index', array_merge(request()->query(), ['sortBy' => 'id'])) }}">
+                                ID
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{{ route('admin.leads.index', array_merge(request()->query(), ['sortBy' => 'type'])) }}">
+                                Type
+                            </a>
+                        </th>
                         <th>User Email</th>
                         <th>More</th>
                     </tr>

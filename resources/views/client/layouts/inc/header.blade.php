@@ -4,6 +4,7 @@
         <div class="container">
             <ul class="header-links pull-left">
                 <li><a href="#"><i class="fa fa-envelope-o"></i> hello@example.com </a></li>
+                <a href="{{route('feedback.index')}}" class="btn btn-info">Feedback</a>
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>

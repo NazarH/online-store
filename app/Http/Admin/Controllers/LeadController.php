@@ -2,11 +2,14 @@
 
 namespace App\Http\Admin\Controllers;
 
+use App\Actions\FilterAction;
 use App\Http\Admin\Requests\LeadStoreRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class LeadController extends Controller
@@ -16,11 +19,35 @@ class LeadController extends Controller
      *
      * @return View
      */
-    public function index(): View
+    public function index(FilterAction $filter, string $sortBy = 'id'): View
     {
-        $leads = Lead::query()->with('user')->paginate(10);
+        $query = Lead::query();
+
+        if (Request::all()) {
+            $query = $filter->handle($query);
+        }
+
+        $this->sortLeads($sortBy);
+
+        $leads = $query
+            ->orderBy($sortBy, Session::get('leads'))
+            ->with('user')
+            ->paginate(10);
 
         return view('admin.leads.index', ['leads' => $leads]);
+    }
+
+    private function sortLeads(string $sortBy)
+    {
+        if ($sortBy !== 'id') {
+            if (empty(Session::get('leads')) || Session::get('leads') === 'desc') {
+                Session::put('leads', 'asc');
+            } else if(Session::get('leads') === 'asc') {
+                Session::put('leads', 'desc');
+            }
+        } else {
+            Session::put('leads', 'asc');
+        }
     }
 
     /**
