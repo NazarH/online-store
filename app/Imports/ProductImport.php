@@ -20,6 +20,7 @@ class ProductImport implements ToCollection, WithHeadingRow
     */
     public function collection(Collection $collection): RedirectResponse
     {
+
         foreach ($collection as $item) {
             $brand = Brand::firstOrCreate([
                 'name' => $item['brand']
@@ -37,6 +38,14 @@ class ProductImport implements ToCollection, WithHeadingRow
                 'brand_id' => $brand->id,
                 'category_id' => $category->id
             ]);
+
+            foreach (json_decode($item['images'], true) as $key => $value) {
+                $imageName = 'image_' . $key . '.jpg';
+
+                $product->addMediaFromUrl($value)
+                    ->usingFileName($imageName)
+                    ->toMediaCollection('images');
+            }
 
             if ($item['attributes']) {
                 $this->makeAttributes($item, $category, $product);
