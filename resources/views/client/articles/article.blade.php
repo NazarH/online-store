@@ -4,7 +4,7 @@
 
         <div class="single-blog-area blog-style-2 mb-50">
             <div class="single-blog-thumbnail">
-                <img src="{{asset('client/img/b5.jpg')}}" alt="">
+                <img src="{{$article->mainImage() ? $article->mainImage() : asset('client/img/b5.jpg')}}" alt="">
                 <div class="post-tag-content">
                     <div class="container">
                         <div class="row">
@@ -34,10 +34,30 @@
                         <div class="single-blog-content">
                             <div class="line"></div>
                             <span class="post-tag">{{$article->user()->first()->name}}</span>
-                            <h4><a href="#" class="post-headline mb-0">{{$article->name}}</a></h4>
+                            <span class="post-tag">{{$article->published_at}}</span>
+                            <h4>Title: <a href="#" class="post-headline mb-0">{{$article->name}}</a></h4>
+                            <h4>Category: <a href="#" class="post-headline mb-0">
+                                    {{
+                                        !empty($article->category()->first()) ? $article->category()->first()->name : 'none'
+                                    }}
+                                </a>
+                            </h4>
+                            <div class="mb-5 mt-5">
+                                {!! $article->short_text !!}
+                            </div>
                             <div class="mb-5 mt-5">
                                 {!! $article->text !!}
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            @foreach($images as $image)
+                                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                    <img src="{{$image}}" alt="" class="img-fluid">
+                                </div>
+                            @endforeach
                         </div>
                     </div>
 

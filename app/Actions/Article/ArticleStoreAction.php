@@ -14,9 +14,8 @@ class ArticleStoreAction
      * Створює нову статтю на основі наданих даних та пов'язує її з поточним користувачем.
      *
      * @param array $data Дані нової статті.
-     * @return void
      */
-    public function handle(array $data): void
+    public function handle(array $data)
     {
         $data['user_id'] = Auth::user()->id;
 
@@ -25,5 +24,7 @@ class ArticleStoreAction
         if (!empty($data['seo'])) {
             $article->seo()->updateOrCreate(['tags' => $data['seo']]);
         }
+
+        return $article;
     }
 }

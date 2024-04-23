@@ -16,10 +16,13 @@ class ArticleStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'short_text' => 'required|string|max:50',
             'text' => 'required|string',
             'template' => [
                 Rule::in(['standard', 'tech'])
             ],
+            'published_at' => 'required|date',
+            'category_id' => 'required|exists:categories,id',
             'seo.*' => 'nullable|string',
         ];
     }

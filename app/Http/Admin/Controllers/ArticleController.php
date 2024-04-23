@@ -6,6 +6,7 @@ use App\Actions\Article\ArticleStoreAction;
 use App\Http\Admin\Requests\ArticleStoreRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -31,7 +32,9 @@ class ArticleController extends Controller
      */
     public function create(): View
     {
-        return view('admin.news.create');
+        $categories = Category::get()->pluck('name', 'id')->toArray();
+
+        return view('admin.news.create', ['categories' => $categories]);
     }
 
     /**
@@ -44,7 +47,9 @@ class ArticleController extends Controller
     {
         $data = $request->validated();
 
-        ArticleStoreAction::run($data);
+        $article = ArticleStoreAction::run($data);
+
+        $article->mediaManage($request);
 
         return redirect()->route('admin.news.index');
     }
@@ -57,7 +62,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article): View
     {
-        return view('admin.news.edit', ['article' => $article]);
+        $categories = Category::get()->pluck('name', 'id')->toArray();
+
+        return view('admin.news.edit', ['article' => $article, 'categories' => $categories]);
     }
 
     /**

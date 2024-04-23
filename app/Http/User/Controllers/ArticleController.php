@@ -31,8 +31,13 @@ class ArticleController extends Controller
     public function single(Request $request): View
     {
         $article = Article::where('slug', '=', $request->slug)->first();
+
         $comments = Comment::where('article_id', '=', $article->id)->paginate(10);
 
-        return view('client.articles.article', ['article' => $article, 'comments' => $comments]);
+        $images = $article->getMedia('images')->map(function ($image) {
+            return $image->getUrl();
+        });
+
+        return view('client.articles.article', ['article' => $article, 'comments' => $comments, 'images' => $images]);
     }
 }

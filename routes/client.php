@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ImageController;
 use App\Http\User\Controllers\ArticleController;
 use App\Http\User\Controllers\BasketController;
 use App\Http\User\Controllers\CatalogController;

@@ -11,15 +11,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Fomvasss\MediaLibraryExtension\HasMedia\HasMedia;
+use Fomvasss\MediaLibraryExtension\HasMedia\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Builder;
 
-class Article extends Model
+class Article extends Model implements HasMedia
 {
     use HasFactory,
         SoftDeletes,
         SlugTrait,
-        HasSeo;
+        HasSeo,
+        InteractsWithMedia;
 
     protected $guarded = ['id'];
+    protected array $mediaSingleCollections = ['images'];
+    protected array $mediaMultipleCollections = ['images'];
 
     /**
      * Повертає масив значень тегів SEO за замовчуванням для статті.
@@ -62,4 +68,22 @@ class Article extends Model
         return $this->morphOne(config('seo.model', Seo::class), 'model')
             ->where('group', $group);
     }
+
+    /**
+     * Відношення "один до одного" до категорії, до якої належить стаття.
+     *
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function mainImage()
+    {
+        return $this->getMedia('images')->map(function ($image) {
+            return $image->getUrl();
+        })->first();
+    }
+
 }

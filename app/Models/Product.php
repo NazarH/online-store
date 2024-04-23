@@ -24,6 +24,7 @@ class Product extends Model implements HasMedia
     protected $guarded = ['id'];
     protected array $mediaSingleCollections = ['images'];
     protected array $mediaMultipleCollections = ['images'];
+
     /**
      * Повертає масив значень тегів SEO за замовчуванням для продукту.
      *
