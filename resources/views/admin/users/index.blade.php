@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <a class="btn btn-success btn-xs" href="{{route('admin.users.create')}}">
+                    <a class="btn btn-success btn-xs" href="{{route('users.create')}}">
                         <i class="fas fa-plus"></i>
                             Create
                     </a>
@@ -27,7 +27,7 @@
                                 ID
                             </th>
                             <th>
-                                <a href="{{route('admin.users.index', array_merge(request()->query(), ['sortBy' => 'name']))}}">
+                                <a href="{{route('users.index', array_merge(request()->query(), ['sortBy' => 'name']))}}">
                                     User
                                 </a>
                             </th>
@@ -41,7 +41,7 @@
                                 Role
                             </th>
                             <th>
-                                <a href="{{route('admin.users.index', array_merge(request()->query(), ['sortBy' => 'created_at']))}}">
+                                <a href="{{route('users.index', array_merge(request()->query(), ['sortBy' => 'created_at']))}}">
                                     Date
                                 </a>
                             </th>
@@ -74,10 +74,10 @@
                                 </td>
                                 <td class="text-right d-flex justify-content-end">
                                     @unless($user->deleted_at)
-                                        <a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-info btn-sm mr-1">
+                                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-info btn-sm mr-1">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <form action="{{route('admin.users.delete', $user->id)}}" method="POST">
+                                        <form action="{{route('users.destroy', $user->id)}}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"

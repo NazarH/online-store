@@ -11,10 +11,10 @@
                  'label' => 'Categories',
                  'has_nested' => true,
                  'routes' => [
-                     'edit' => 'admin.categories.edit',
-                     'create' => 'admin.categories.create',
-                     'delete' => 'admin.categories.delete',
-                     'order' => 'admin.categories.order'
+                     'edit' => 'categories.edit',
+                     'create' => 'categories.create',
+                     'delete' => 'categories.destroy',
+                     'order' => 'categories.order'
                  ],
             ]) !!}
         </div>

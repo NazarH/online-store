@@ -45,12 +45,12 @@ class NotificationController extends Controller
 
         if ($data['notification_date'] > now()) {
             Notification::create($data);
-            return redirect()->route('admin.leads.notifications.index');
+            return redirect()->route('notifications.index');
         }
 
         NotificationSendAction::run($data);
 
-        return redirect()->route('admin.leads.notifications.index');
+        return redirect()->route('notifications.index');
     }
 
     /**

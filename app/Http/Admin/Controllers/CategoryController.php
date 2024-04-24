@@ -52,7 +52,7 @@ class CategoryController extends Controller
             $category->seo()->updateOrCreate(['tags' => $data['seo']]);
         }
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('categories.index');
     }
 
     /**

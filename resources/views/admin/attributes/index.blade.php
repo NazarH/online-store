@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <a class="btn btn-success btn-xs" href="{{route('admin.attributes.create')}}">
+                    <a class="btn btn-success btn-xs" href="{{route('attributes.create')}}">
                         <i class="fas fa-plus"></i>
                         Create
                     </a>
@@ -33,10 +33,10 @@
                                 <td>{{$attribute->name}}</td>
                                 <td class="text-right d-flex justify-content-end">
                                     @unless($attribute->deleted_at)
-                                        <a href="{{route('admin.attributes.edit', $attribute->id)}}" class="btn btn-info btn-sm mr-1">
+                                        <a href="{{route('attributes.edit', $attribute->id)}}" class="btn btn-info btn-sm mr-1">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <form action="{{route('admin.attributes.delete', $attribute->id)}}" method="POST">
+                                        <form action="{{route('attributes.destroy', $attribute->id)}}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"

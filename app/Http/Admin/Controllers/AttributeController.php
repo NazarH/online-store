@@ -52,7 +52,7 @@ class AttributeController extends Controller
         $data = $request->validated();
         AttributeStoreAction::run($data);
 
-        return redirect()->route('admin.attributes.index');
+        return redirect()->route('attributes.index');
     }
 
     /**
@@ -66,8 +66,7 @@ class AttributeController extends Controller
         $categories = Category::get()->pluck('name', 'id')->toArray();
 
         return view('admin.attributes.edit', [
-            'attribute' => $attribute, '
-            categories' => $categories
+            'attribute' => $attribute, 'categories' => $categories
         ]);
     }
 
@@ -98,7 +97,7 @@ class AttributeController extends Controller
         $data = $request->validated();
         AttributeAddAction::run($data, $attribute);
 
-        return redirect()->route('admin.attributes.edit', $attribute->id);
+        return redirect()->route('attributes.edit', $attribute->id);
     }
 
     /**

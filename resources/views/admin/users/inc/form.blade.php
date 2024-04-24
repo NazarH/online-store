@@ -1,6 +1,10 @@
 <form action="{{route($route, $user->id ?? null)}}" method="POST" enctype="multipart/form-data">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     <div class="row">
         <div class="col-md-6">
             <div class="row">

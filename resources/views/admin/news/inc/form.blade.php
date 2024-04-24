@@ -1,6 +1,10 @@
 <form action="{{route($route, $article->id ?? null)}}" method="POST"  enctype="multipart/form-data">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     {!! Lte3::mediaFile('images', isset($article) ? $article : null, [
             'label' => 'Зображення',
             'multiple' => true,
@@ -18,9 +22,10 @@
         'class' => 'f-cke-full',
     ]) !!}
 
-    {!! Lte3::select2('category_id', !empty($article) ? $article->category()->first()->id : null, $categories, [
+    {!! Lte3::select2('category_id', !empty($article) && $article->category()?->first() ? $article->category()->first()->id : null, $categories, [
         'label' => 'Category',
     ]) !!}
+
 
     {!! Lte3::textarea('text', $article->text ?? null, [
         'label' => 'Text of article',

@@ -1,6 +1,10 @@
 <form action="{{route($route, $notification->id ?? null)}}" method="POST">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     {!! Lte3::select2('type', null, [
             'subscription' => 'Subscription',
         ], [

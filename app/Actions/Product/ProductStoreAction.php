@@ -17,6 +17,7 @@ class ProductStoreAction
      */
     public function handle(array $data): Product
     {
+        dd($data);
         $data['article'] = uniqid();
 
         $product = Product::create($data);

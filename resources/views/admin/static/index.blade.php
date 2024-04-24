@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     @include('admin.parts.content-header', [
-        'page_title' => 'Новини'
+        'page_title' => 'Статичні сторінки'
     ])
 
     <!-- Main content -->
@@ -9,7 +9,7 @@
         <section class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <a class="btn btn-success btn-xs" href="{{route('admin.static.create')}}">
+                    <a class="btn btn-success btn-xs" href="{{route('static.create')}}">
                         <i class="fas fa-plus"></i>
                         Create
                     </a>
@@ -43,10 +43,10 @@
                             </td>
                             <td class="text-right d-flex" >
                                 @unless($page->deleted_at)
-                                    <a href="{{route('admin.static.edit', $page->id)}}" class="btn btn-info btn-sm mr-1">
+                                    <a href="{{route('static.edit', $page->id)}}" class="btn btn-info btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <form action="{{route('admin.static.delete', $page->id)}}" method="POST">
+                                    <form action="{{route('static.destroy', $page->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"

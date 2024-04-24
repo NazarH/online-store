@@ -11,7 +11,7 @@
         <section class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <a class="btn btn-success btn-xs" href="{{route('admin.leads.create')}}">
+                    <a class="btn btn-success btn-xs" href="{{route('leads.create')}}">
                         <i class="fas fa-plus"></i>
                         Create
                     </a>
@@ -22,12 +22,12 @@
                     <thead>
                     <tr>
                         <th>
-                            <a href="{{ route('admin.leads.index', array_merge(request()->query(), ['sortBy' => 'id'])) }}">
+                            <a href="{{ route('leads.index', array_merge(request()->query(), ['sortBy' => 'id'])) }}">
                                 ID
                             </a>
                         </th>
                         <th>
-                            <a href="{{ route('admin.leads.index', array_merge(request()->query(), ['sortBy' => 'type'])) }}">
+                            <a href="{{ route('leads.index', array_merge(request()->query(), ['sortBy' => 'type'])) }}">
                                 Type
                             </a>
                         </th>
@@ -47,10 +47,10 @@
                             </td>
                             <td class="text-right d-flex justify-content-end">
                                 @unless($lead->deleted_at)
-                                    <a href="{{route('admin.leads.edit', $lead->id)}}" class="btn btn-info btn-sm mr-1">
+                                    <a href="{{route('leads.edit', $lead->id)}}" class="btn btn-info btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <form action="{{route('admin.leads.delete', $lead->id)}}" method="POST">
+                                    <form action="{{route('leads.destroy', $lead->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"

@@ -31,6 +31,9 @@ class FilterAction
                     case 'name':
                         $query->where('name', 'like', '%'.$value.'%');
                         break;
+                    case 'email':
+                        $query->where('email', 'like', '%'.$value.'%');
+                        break;
                     case 'type_of_lead':
                         $query->where('type', $value);
                         break;

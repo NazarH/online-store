@@ -1,6 +1,10 @@
 <form action="{{route($route, $category->id ?? null)}}" method="POST">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     <input type="hidden" name="parent_id" value="">
 
     {!! Lte3::text('name', $category->name ?? null, [

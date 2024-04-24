@@ -8,6 +8,11 @@
 
 <form action="{{route($route, $product->id ?? null)}}" method="POST" enctype="multipart/form-data">
     @csrf
+
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     {!! Lte3::mediaFile('images', isset($product) ? $product : null, [
             'label' => 'Зображення',
             'multiple' => true,

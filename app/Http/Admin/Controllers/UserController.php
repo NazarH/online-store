@@ -23,7 +23,7 @@ class UserController extends Controller
      * @param string $sortBy
      * @return View
      */
-    public function index(FilterAction $filter, string $sortBy = 'id'): View
+    public function index(FilterAction $filter, array $sortBy = ['sortBy' => 'id']): View
     {
         $query = User::query();
 
@@ -31,9 +31,11 @@ class UserController extends Controller
             $query = $filter->handle($query);
         }
 
-        $this->sortUsers($sortBy);
+        $field = Request::has('sortBy') ? Request::only(['sortBy']) : $sortBy;
 
-        $users = $query->orderBy($sortBy, Session::get('users'))->paginate(10);
+        $this->sortUsers($field['sortBy']);
+
+        $users = $query->orderBy($field['sortBy'], Session::get('users'))->paginate(10);
 
         return view('admin.users.index', ['users' => $users]);
     }
@@ -82,7 +84,7 @@ class UserController extends Controller
 
         Cache::forget('statistic');
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('users.index');
     }
 
     /**

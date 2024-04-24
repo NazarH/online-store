@@ -16,7 +16,7 @@ class AttributeUpdateRequest extends FormRequest
         return [
             'name' => 'required|string|max:30',
             'category_ids' => 'required|array',
-            'value_ids' => 'required|array'
+            'value_ids' => 'nullable|array'
         ];
     }
 }

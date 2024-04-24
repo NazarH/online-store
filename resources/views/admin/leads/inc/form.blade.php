@@ -1,6 +1,10 @@
 <form action="{{route($route, $lead->id ?? null)}}" method="POST">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     {!! Lte3::select2('type', $lead->type ?? null, [
             'feedback' => 'Feedback',
             'subscription' => 'Subscription',

@@ -19,7 +19,7 @@ class UserStoreRequest extends FormRequest
 
         return [
             'name' => 'required|string|max:30',
-            'phone' => 'required|string|unique:users,phone|min:13',
+            'phone' => ['required', 'string', 'unique:users,phone', 'min:13', 'max:13', Rule::unique('users')->ignore($id)],
             'role' => [ Rule::in(['admin', 'client']) ],
             'email' => [ 'required',  'string',  'email', Rule::unique('users')->ignore($id) ],
             'password' =>  [ $available, 'string',  'min:8', 'max:16', 'required_with:password_confirmation', 'same:password_confirmation' ]

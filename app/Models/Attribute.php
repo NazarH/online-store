@@ -42,7 +42,7 @@ class Attribute extends Model
      */
     public function belongsToCategories(): array
     {
-        return $this->categories()->pluck('name', 'id')->toArray();
+        return $this->categories()->pluck('id')->toArray();
     }
 
     public function values()

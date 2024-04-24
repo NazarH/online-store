@@ -1,6 +1,10 @@
 <form action="{{route($route, $attribute->id ?? null)}}" method="POST">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     {!! Lte3::text('name', $attribute->name ?? null, [
         'type' => 'text',
         'max' => '30',
@@ -23,7 +27,7 @@
         ]) !!}
     @endif
 
-    {!! Lte3::select2('category_ids[]', empty($attribute) ? null : $attribute->belongsToCategories(), $categories ?? null, [
+    {!! Lte3::select2('category_ids[]', isset($attribute) ? $attribute->belongsToCategories() : null, $categories ?? null, [
         'label' => 'Categories',
         'multiple' => true,
     ]) !!}

@@ -12,7 +12,7 @@
                 <h3 class="card-title">Створити</h3>
             </div>
             <div class="card-body">
-                @include('admin.users.inc.form', ['route' => 'admin.users.store'])
+                @include('admin.users.inc.form', ['route' => 'users.store'])
             </div>
         </div>
     </section>

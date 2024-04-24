@@ -12,7 +12,7 @@
                 <h3 class="card-title">Створити</h3>
             </div>
             <div class="card-body">
-                @include('admin.notifications.inc.form', ['route' => 'admin.leads.notifications.send'])
+                @include('admin.notifications.inc.form', ['route' => 'notifications.send'])
             </div>
         </div>
     </section>

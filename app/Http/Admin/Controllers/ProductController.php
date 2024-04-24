@@ -30,7 +30,7 @@ class ProductController extends Controller
      * @param string $sortBy
      * @return View
      */
-    public function index(FilterAction $filter, string $sortBy = 'id'): View
+    public function index(FilterAction $filter, array $sortBy = ['sortBy' => 'id']): View
     {
         $query = Product::query();
 
@@ -38,9 +38,11 @@ class ProductController extends Controller
             $query = $filter->handle($query);
         }
 
-        $this->sortProducts($sortBy);
+        $field = Request::has('sortBy') ? Request::only(['sortBy']) : $sortBy;
 
-        $products = $query->orderBy($sortBy, Session::get('products'))->paginate(10);
+        $this->sortProducts($field['sortBy']);
+
+        $products = $query->orderBy($field['sortBy'], Session::get('products'))->paginate(10);
 
         $categories = Category::get()->pluck('name', 'id')->toArray();
 
@@ -99,7 +101,7 @@ class ProductController extends Controller
 
         Cache::forget('statistic');
 
-        return redirect()->route('admin.products.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -131,6 +133,7 @@ class ProductController extends Controller
         $product->mediaManage($request);
 
         ProductUpdateAction::run($data, $product);
+
         $product->seo()->updateOrCreate(['tags' => $data['seo']]);
 
         return redirect()->back();

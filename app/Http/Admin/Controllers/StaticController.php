@@ -51,7 +51,7 @@ class StaticController extends Controller
             $page->seo()->updateOrCreate(['tags' => $data['seo']]);
         }
 
-        return redirect()->route('admin.static.index');
+        return redirect()->route('static.index');
     }
 
     /**

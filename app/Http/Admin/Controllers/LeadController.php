@@ -19,7 +19,7 @@ class LeadController extends Controller
      *
      * @return View
      */
-    public function index(FilterAction $filter, string $sortBy = 'id'): View
+    public function index(FilterAction $filter, array $sortBy = ['sortBy' => 'id']): View
     {
         $query = Lead::query();
 
@@ -27,10 +27,12 @@ class LeadController extends Controller
             $query = $filter->handle($query);
         }
 
-        $this->sortLeads($sortBy);
+        $field = Request::has('sortBy') ? Request::only(['sortBy']) : $sortBy;
+
+        $this->sortLeads($field['sortBy']);
 
         $leads = $query
-            ->orderBy($sortBy, Session::get('leads'))
+            ->orderBy($field['sortBy'], Session::get('leads'))
             ->with('user')
             ->paginate(10);
 
@@ -74,7 +76,7 @@ class LeadController extends Controller
 
         Cache::forget('statistic');
 
-        return redirect()->route('admin.leads.index');
+        return redirect()->route('leads.index');
     }
 
     /**

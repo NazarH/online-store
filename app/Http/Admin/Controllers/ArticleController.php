@@ -51,7 +51,7 @@ class ArticleController extends Controller
 
         $article->mediaManage($request);
 
-        return redirect()->route('admin.news.index');
+        return redirect()->route('news.index');
     }
 
     /**

@@ -12,7 +12,7 @@
                 <h3 class="card-title">Редагувати</h3>
             </div>
             <div class="card-body">
-                @include('admin.categories.inc.form', ['category' => $category, 'route' => 'admin.categories.update'])
+                @include('admin.categories.inc.form', ['category' => $category, 'route' => 'categories.update', 'put' => true])
             </div>
         </div>
     </section>

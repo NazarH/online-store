@@ -26,7 +26,7 @@
         <section class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <form action="{{route('admin.products.create')}}" method="GET" class="form-inline">
+                    <form action="{{route('products.create')}}" method="GET" class="form-inline">
                         {!! Lte3::select2('category_id', null, $categories, [
                             'label' => 'Choose category:',
                         ]) !!}
@@ -43,22 +43,22 @@
                     <thead>
                         <tr>
                             <th>
-                                <a href="{{ route('admin.products.index', array_merge(request()->query(), ['sortBy' => 'id'])) }}">
+                                <a href="{{ route('products.index', array_merge(request()->query(), ['sortBy' => 'id'])) }}">
                                     ID
                                 </a>
                             </th>
                             <th>
-                                <a href="{{ route('admin.products.index', array_merge(request()->query(), ['sortBy' => 'name'])) }}">
+                                <a href="{{ route('products.index', array_merge(request()->query(), ['sortBy' => 'name'])) }}">
                                     Name
                                 </a>
                             </th>
                             <th>
-                                <a href="{{ route('admin.products.index', array_merge(request()->query(), ['sortBy' => 'article'])) }}">
+                                <a href="{{ route('products.index', array_merge(request()->query(), ['sortBy' => 'article'])) }}">
                                     Article
                                 </a>
                             </th>
                             <th>
-                                <a href="{{ route('admin.products.index', array_merge(request()->query(), ['sortBy' => 'price'])) }}">
+                                <a href="{{ route('products.index', array_merge(request()->query(), ['sortBy' => 'price'])) }}">
                                     Price (UAH)
                                 </a>
                             </th>
@@ -110,10 +110,10 @@
                                 </td>
                                 <td class="text-right d-flex justify-content-end">
                                     @unless($product->deleted_at)
-                                        <a href="{{route('admin.products.edit', $product->id)}}" class="btn btn-info btn-sm mr-1">
+                                        <a href="{{route('products.edit', $product->id)}}" class="btn btn-info btn-sm mr-1">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <form action="{{route('admin.products.delete', $product->id)}}" method="POST">
+                                        <form action="{{route('products.destroy', $product->id)}}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"

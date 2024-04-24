@@ -9,7 +9,7 @@
         <section class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    <a class="btn btn-success btn-xs" href="{{route('admin.orders.create')}}">
+                    <a class="btn btn-success btn-xs" href="{{route('orders.create')}}">
                         <i class="fas fa-plus"></i>
                         Create
                     </a>
@@ -41,10 +41,10 @@
                             </td>
                             <td class="text-right d-flex justify-content-end">
                                 @unless($order->deleted_at)
-                                    <a href="{{route('admin.orders.edit', $order->id)}}" class="btn btn-info btn-sm mr-1">
+                                    <a href="{{route('orders.edit', $order->id)}}" class="btn btn-info btn-sm mr-1">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <form action="{{route('admin.orders.delete', $order->id)}}" method="POST">
+                                    <form action="{{route('orders.destroy', $order->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"

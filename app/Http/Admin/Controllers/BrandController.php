@@ -45,7 +45,7 @@ class BrandController extends Controller
         $data = $request->validated();
         BrandStoreAction::run($data);
 
-        return redirect()->route('admin.brands.index');
+        return redirect()->route('brands.index');
     }
 
     /**

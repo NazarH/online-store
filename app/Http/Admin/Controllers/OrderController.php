@@ -44,11 +44,13 @@ class OrderController extends Controller
     {
         $data = $request->validated();
 
-        OrderStoreAction::run($data);
+        $order = Order::create($data);
+
+        OrderStoreAction::run($data, $order);
 
         Cache::forget('statistic');
 
-        return redirect()->route('admin.orders.index');
+        return redirect()->route('orders.index');
     }
 
     /**

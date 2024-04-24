@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('admin.users.index')}}" class="nav-link">
+            <a href="{{route('users.index')}}" class="nav-link">
                 <i class="nav-icon far fa-solid fa-user"></i>
 
                 <p>
@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.categories.index') }}" class="nav-link">
+            <a href="{{ route('categories.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-bars"></i>
 
                 <p>
@@ -39,7 +39,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.attributes.index') }}" class="nav-link">
+            <a href="{{ route('attributes.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-arrow-right ml-4"></i>
 
                 <p>
@@ -48,7 +48,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.brands.index') }}" class="nav-link">
+            <a href="{{ route('brands.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-star"></i>
 
                 <p>
@@ -60,7 +60,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('admin.products.index') }}" class="nav-link">
+            <a href="{{route('products.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-truck"></i>
 
                 <p>
@@ -72,7 +72,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.orders.index') }}" class="nav-link">
+            <a href="{{ route('orders.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-shopping-cart"></i>
 
 
@@ -85,7 +85,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('admin.news.index')}}" class="nav-link">
+            <a href="{{route('news.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-newspaper"></i>
 
                 <p>
@@ -97,7 +97,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('admin.static.index')}}" class="nav-link">
+            <a href="{{route('static.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-thumbtack"></i>
 
                 <p>
@@ -109,7 +109,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('admin.leads.index')}}" class="nav-link">
+            <a href="{{route('leads.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-envelope"></i>
 
                 <p>
@@ -121,7 +121,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.leads.notifications.index') }}" class="nav-link">
+            <a href="{{ route('notifications.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-arrow-right ml-4"></i>
 
                 <p>

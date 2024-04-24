@@ -1,6 +1,10 @@
 <form action="{{route($route, $order->id ?? null)}}" method="POST">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     {!! Lte3::text('name', $order->name ?? null, [
         'type' => 'text',
         'max' => '30',

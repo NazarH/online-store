@@ -1,6 +1,10 @@
 <form action="{{route($route, $page->id ?? null)}}" method="POST">
     @csrf
 
+    @if(!empty($put))
+        @method('PUT')
+    @endif
+
     {!! Lte3::text('name', $page->name ?? null, [
         'type' => 'text',
         'max' => '30',
