@@ -1,4 +1,4 @@
-@extends('client.layouts.app')
+@extends('client.layouts.error')
 @section('content')
     <div class="d-flex justify-content-center">
         <div class="flex-column">

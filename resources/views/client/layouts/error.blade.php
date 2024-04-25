@@ -43,22 +43,21 @@
     </head>
     <body>
         <div class="wrapper">
-            @include('client.layouts.inc.header')
+            @include('client.layouts.inc.error-header')
+
             <main class="content-wrapper">
                 @yield('content')
             </main>
+
             @include('client.layouts.inc.footer')
 
         </div>
         <div class="back-ground hidden" id="backForForm"></div>
-        @include('client.auth.login')
-        @include('client.auth.register')
 
         <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('client/js/slick.min.js') }}"></script>
         <script src="{{ asset('client/js/nouislider.min.js') }}"></script>
         <script src="{{ asset('client/js/jquery.zoom.min.js') }}"></script>
         <script src="{{ asset('client/js/main.js') }}"></script>
-        <script src="{{ asset('client/js/modal.js') }}"></script>
     </body>
 </html>

@@ -40,19 +40,4 @@
 
 <!-- CKEditor -->
 <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
-
-<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-            ckfinder: {
-                uploadUrl: window.location.origin + '/admin/static/upload'
-            },
-        } )
-        .catch(error => {
-            console.error(error);
-        });
-</script>
-
-<script>
-
-</script>
+<script src="{{ asset('client/js/ckeditor.js') }}"></script>
