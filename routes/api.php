@@ -3,6 +3,7 @@
 use App\Http\Api\AuthController;
 use App\Http\Api\CartController;
 use App\Http\Api\CategoryController;
+use App\Http\Api\ElasticSearchController;
 use App\Http\Api\LocationController;
 use App\Http\Api\ProfileController;
 use App\Http\Api\PageController;
@@ -103,4 +104,16 @@ Route::group(['prefix' => 'cart'], function(){
     Route::post('{productId}/remove')
         ->uses([CartController::class, 'remove']);
 });
+
+Route::group(['prefix' => 'elastic'], function(){
+    Route::get('search')
+        ->uses([ElasticSearchController::class, 'search']);
+    Route::get('filter-by-category-id')
+        ->uses([ElasticSearchController::class, 'filterByCategoryId']);
+    Route::get('filter-by-price-range')
+        ->uses([ElasticSearchController::class, 'filterByPriceRange']);
+    Route::get('sorting-by-field')
+        ->uses([ElasticSearchController::class, 'sortingByField']);
+});
+
 

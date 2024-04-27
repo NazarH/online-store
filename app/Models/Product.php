@@ -3,19 +3,21 @@
 namespace App\Models;
 
 use App\Traits\SlugTrait;
+
+use Elasticsearch\ClientBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use Fomvasss\Seo\Models\HasSeo;
 use Fomvasss\MediaLibraryExtension\HasMedia\HasMedia;
 use Fomvasss\MediaLibraryExtension\HasMedia\InteractsWithMedia;
+
 
 class Product extends Model implements HasMedia
 {
@@ -25,6 +27,29 @@ class Product extends Model implements HasMedia
     protected array $mediaSingleCollections = ['images'];
     protected array $mediaMultipleCollections = ['images'];
 
+    public function index()
+    {
+        $client = ClientBuilder::create()->setHosts(['elasticsearch:9200'])->build();
+
+        $params = [
+            'index' => 'products',
+            'id' => $this->id,
+            'body' => [
+                'name' => $this->name,
+                'price' => $this->price,
+                'old_price' => $this->old_price,
+                'article' => $this->article,
+                'count' => $this->count,
+                'slug' => $this->slug,
+                'brand_id' => $this->brand_id,
+                'category_id' => $this->category_id,
+                'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+                'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
+            ],
+        ];
+
+        $client->index($params);
+    }
     /**
      * Повертає масив значень тегів SEO за замовчуванням для продукту.
      *

@@ -34,6 +34,11 @@ return [
     */
 
     'connections' => [
+        'elasticsearch' => [
+            'hosts' => [
+                env('ELASTICSEARCH_HOST', 'http://localhost:9200'),
+            ],
+        ],
 
         'testing' => [
             'driver' => 'mysql',

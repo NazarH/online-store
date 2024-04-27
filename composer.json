@@ -9,6 +9,7 @@
         "ckeditor/ckeditor": "^4.24",
         "cloudipsp/php-sdk-v2": "^1.0",
         "diglactic/laravel-breadcrumbs": "^9.0",
+        "elasticsearch/elasticsearch": "^7.9",
         "fomvasss/laravel-lte3": "^1.26",
         "fomvasss/laravel-medialibrary-extension": "^5.8",
         "fomvasss/laravel-seo": "^1.7",
